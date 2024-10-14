@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
 import bcrypt from "bcrypt";
 import Profile from "../models/profile.model";
+import sendMAIL from "../utils/nodemailer";
 
 // send otp
 const sendOTP = async (req, res) => {
@@ -166,6 +167,13 @@ const login = async (req, res) => {
 		const { email, password } = req.body;
 
 		// data validation, and check if the user exists or not
+		if (!email || !password) {
+			return res.status(403).json({
+				success: false,
+				message: "All fields are required",
+			});
+		}
+
 		const user = await User.findOne({ email }).select("-password"); // check if other fields can be removed from user
 
 		if (!user) {
@@ -192,7 +200,10 @@ const login = async (req, res) => {
 				id: user._id,
 				accountType: user.accountType,
 			},
-			process.env.JWT_SECRET
+			process.env.JWT_SECRET,
+			{
+				expiresIn: "2h",
+			}
 		);
 
 		user.token = token;
@@ -200,7 +211,8 @@ const login = async (req, res) => {
 		// return response and cookie with generated token
 		return res
 			.cookie("token", token, {
-				expires: Date.now() + 3 * 24 * 60 * 60 * 1000,
+				expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+				httpOnly: true,
 			})
 			.status(200)
 			.json({
@@ -252,10 +264,17 @@ const changePassword = async (req, res) => {
 		}
 
 		// if both matches, then update new password in DB
-		await User.findOneAndUpdate(
+		const updatedUser = await User.findOneAndUpdate(
 			{ email },
 			{ password: newPassword },
 			{ new: true }
+		);
+
+		// send mail for password change to user's email
+		await sendMAIL(
+			updatedUser.email,
+			"Password changed for your Study Notion account",
+			`Hi ${updatedUser.firstName}, your Study Notion account password has been changed. If you are not the one behind this update, please feel free to reset your password at Study Notion website`
 		);
 
 		// return response
