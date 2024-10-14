@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
-    trim: true,
+		trim: true,
 	},
 	additionalDetails: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -42,10 +42,16 @@ const userSchema = new mongoose.Schema({
 			required: true,
 		},
 	],
-  image: {
-    type: String,
-    required: true,
-  },
+	image: {
+		type: String,
+		required: true,
+	},
+	token: {
+		type: String,
+	},
+	resetPasswordExpiry: {
+		type: Date,
+	},
 });
 
 const User = mongoose.model("User", userSchema);
