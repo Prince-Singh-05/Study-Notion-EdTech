@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const tagSchema = new mongoose.Schema({
-	course: [
+	courses: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Course",
