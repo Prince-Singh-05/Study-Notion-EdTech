@@ -22,7 +22,7 @@ const createCourse = async (req, res) => {
 			!courseName ||
 			!courseDescription ||
 			!price ||
-			!tag ||
+			!tagIds ||
 			!whatYouWillLearn
 		) {
 			return res.status(400).json({

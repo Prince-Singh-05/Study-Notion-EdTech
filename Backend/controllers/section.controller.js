@@ -76,14 +76,44 @@ const getAllSectionsForACourse = async (req, res) => {
 	}
 };
 
-const deleteSection = async (req, res) => {
+const updateSection = async (req, res) => {
 	try {
-		const { sectionId } = req.body;
-
-		if (!sectionId) {
+		// get data from req.body
+		const { sectionId, sectionName } = req.body;
+		// validate data
+		if (!sectionId || !sectionName) {
 			return res.status(400).json({
 				success: false,
-				message: "Section id is required to delete a section",
+				message: "All fields are reuired",
+			});
+		}
+
+		// update the entry in DB
+		await Section.findByIdAndUpdate(sectionId, { sectionName });
+
+		// return response
+		return res.status(200).json({
+			success: true,
+			message: "Section updated successfully",
+		});
+	} catch (error) {
+		console.error(error.message);
+		return res.status(500).json({
+			success: false,
+			message: "Error in updating section details",
+		});
+	}
+};
+
+const deleteSection = async (req, res) => {
+	try {
+		const { sectionId, courseId } = req.body;
+
+		if (!sectionId || !courseId) {
+			return res.status(400).json({
+				success: false,
+				message:
+					"Section id and course id is required to delete a section",
 			});
 		}
 
@@ -93,6 +123,12 @@ const deleteSection = async (req, res) => {
 
 		subSections.map(async (subSection) => {
 			await SubSection.findByIdAndDelete(subSection);
+		});
+
+		await Course.findByIdAndUpdate(courseId, {
+			$pull: {
+				courseContent: section._id,
+			},
 		});
 
 		return res.status(200).json({
@@ -108,4 +144,9 @@ const deleteSection = async (req, res) => {
 	}
 };
 
-export { createSection, getAllSectionsForACourse, deleteSection };
+export {
+	createSection,
+	getAllSectionsForACourse,
+	updateSection,
+	deleteSection,
+};

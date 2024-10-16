@@ -3,7 +3,7 @@ import connectCloudinary from "../config/cloudinary";
 
 connectCloudinary();
 
-const uploadImageOnCloudinary = async (file, folder, height, quality) => {
+const uploadFileOnCloudinary = async (file, folder, height, quality) => {
 	try {
 		const options = {
 			folder,
@@ -21,10 +21,10 @@ const uploadImageOnCloudinary = async (file, folder, height, quality) => {
 		return await cloudinary.uploader.upload(file.tempFilePath, options);
 	} catch (error) {
 		console.log(
-			"Error while uploading image to cloudinary: ",
+			"Error while uploading file to cloudinary: ",
 			error.message
 		);
 	}
 };
 
-export default uploadImageOnCloudinary;
+export default uploadFileOnCloudinary;
