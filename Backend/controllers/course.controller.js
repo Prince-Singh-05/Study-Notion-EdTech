@@ -2,6 +2,7 @@ import Course from "../models/course.model";
 import Tag from "../models/tags.model";
 import User from "../models/user.model";
 import uploadImageOnCloudinary from "../utils/cloudinary";
+import {} from "dotenv/config";
 
 const createCourse = async (req, res) => {
 	try {
@@ -106,7 +107,11 @@ const createCourse = async (req, res) => {
 
 const getAllCourses = async (req, res) => {
 	try {
-		const allCourses = await Course.find({}).populate("tags", "name");
+		const allCourses = await Course.find({})
+			.populate("tags", "name")
+			.populate("courseContent")
+			.populate("courseContent.subSections")
+			.exec();
 
 		return res.status(200).json({
 			success: true,
