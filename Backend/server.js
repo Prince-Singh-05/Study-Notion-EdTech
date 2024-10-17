@@ -8,8 +8,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser);
 
-
+// routes
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-})
+	console.log(`Server is running on port ${PORT}`);
+});
