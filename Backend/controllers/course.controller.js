@@ -1,5 +1,5 @@
 import Course from "../models/course.model";
-import Tag from "../models/tags.model";
+import Category from "../models/category.model";
 import User from "../models/user.model";
 import uploadImageOnCloudinary from "../utils/cloudinary";
 import {} from "dotenv/config";
@@ -12,7 +12,7 @@ const createCourse = async (req, res) => {
 			courseDescription,
 			whatYouWillLearn,
 			price,
-			tagIds,
+			categoryId,
 		} = req.body;
 
 		const thumbnail = req.files.thumbnail;
@@ -22,7 +22,7 @@ const createCourse = async (req, res) => {
 			!courseName ||
 			!courseDescription ||
 			!price ||
-			!tagIds ||
+			!categoryId ||
 			!whatYouWillLearn
 		) {
 			return res.status(400).json({
@@ -34,18 +34,15 @@ const createCourse = async (req, res) => {
 		// instructor id
 		const userId = req.user.id;
 
-		// tags validation
+		// category validation
+		const categoryDetails = await Category.findById(categoryId);
 
-		tagIds.map(async (tagId) => {
-			const tagDetails = await Tag.findById(tagId);
-
-			if (!tagDetails) {
-				return res.status(400).json({
-					success: false,
-					message: "tag details not found",
-				});
-			}
-		});
+		if (!categoryDetails) {
+			return res.status(400).json({
+				success: false,
+				message: "category details not found",
+			});
+		}
 
 		// upload file to cloudinary
 		const thumbnailImage = await uploadImageOnCloudinary(
@@ -67,7 +64,7 @@ const createCourse = async (req, res) => {
 			instructor: userId,
 			price,
 			whatYouWillLearn,
-			tags: tagIds.map((tagId) => tagId),
+			category: categoryId,
 			thumbnail: thumbnailImage.secure_url,
 		});
 
@@ -82,13 +79,12 @@ const createCourse = async (req, res) => {
 			{ new: true }
 		);
 
-		// add course in Tag model
-		tagIds.map(async (tagId) => {
-			await Tag.findByIdAndUpdate(tagId, {
-				$push: {
-					courses: newCourse._id,
-				},
-			});
+		// add course in Category model
+
+		await Category.findByIdAndUpdate(categoryId, {
+			$push: {
+				courses: newCourse._id,
+			},
 		});
 
 		// return response
