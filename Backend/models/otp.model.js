@@ -1,21 +1,24 @@
 import mongoose from "mongoose";
 import sendMAIL from "../utils/nodemailer";
 
-const otpSchema = new mongoose.Schema({
-	email: {
-		type: String,
-		required: true,
+const otpSchema = new mongoose.Schema(
+	{
+		email: {
+			type: String,
+			required: true,
+		},
+		otp: {
+			type: String,
+			required: true,
+		},
+		createdAt: {
+			type: Date,
+			default: Date.now(),
+			expires: 5 * 60 * 1000,
+		},
 	},
-	otp: {
-		type: String,
-		required: true,
-	},
-	createdAt: {
-		type: Date,
-		default: Date.now(),
-		expires: 5 * 60 * 1000,
-	},
-});
+	{ timestamps: true }
+);
 
 async function sendVerificationEmail(email, otp) {
 	try {

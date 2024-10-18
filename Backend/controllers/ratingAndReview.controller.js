@@ -1,5 +1,6 @@
 import RatingAndReview from "../models/ratingAndReview.model";
 import Course from "../models/course.model";
+import mongoose from "mongoose";
 
 // create Rating/Review
 const createRating = async (req, res) => {
@@ -91,7 +92,7 @@ const getAverageRating = async (req, res) => {
 		// find all reviews for the course and aggregate the averageRating
 		const result = await RatingAndReview.aggregate([
 			{
-				$match: { course: "$courseId" },
+				$match: { course: mongoose.Types.ObjectId(courseId) },
 			},
 			{
 				$group: { _id: null, averageRating: { $avg: "$rating" } },
