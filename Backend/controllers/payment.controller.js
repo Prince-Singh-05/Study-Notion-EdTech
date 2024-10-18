@@ -30,7 +30,7 @@ const capturePayment = async (req, res) => {
 
 		// check if user already paid for the same course
 		const uid = new mongoose.Schema.Types.ObjectId(userId);
-		if (course.studentEnrolled.includes(uid)) {
+		if (course.studentsEnrolled.includes(uid)) {
 			return res.status(200).json({
 				success: false,
 				message: "Student is already enrolled in this course",
@@ -91,7 +91,7 @@ const verifySignature = async (req, res) => {
 				courseId,
 				{
 					$push: {
-						studentEnrolled: userId,
+						studentsEnrolled: userId,
 					},
 				},
 				{ new: true }

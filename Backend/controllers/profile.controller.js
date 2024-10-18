@@ -79,7 +79,7 @@ const deleteAccount = async (req, res) => {
 					EnrolledCourses.map(async (courseId) => {
 						await Course.findByIdAndUpdate(courseId, {
 							$pull: {
-								studentEnrolled: user._id,
+								studentsEnrolled: user._id,
 							},
 						});
 					});

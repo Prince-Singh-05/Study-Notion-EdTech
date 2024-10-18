@@ -123,4 +123,63 @@ const getAllCourses = async (req, res) => {
 	}
 };
 
+const getCourseDetails = async (req, res) => {
+	try {
+		const { courseId } = req.body;
+		if (!courseId) {
+			return res.json({
+				success: false,
+				message: "course id is required",
+			});
+		}
+
+		const courseDetails = await Course.findById(courseId)
+			.populate({
+				path: "instructor",
+				populate: {
+					path: "additionalDetails",
+				},
+			})
+			.populate({
+				path: "courseContent",
+				populate: {
+					path: "subSections",
+				},
+			})
+			.populate({
+				path: "ratingAndReview",
+				populate: {
+					path: "user",
+				},
+			})
+			.populate("category")
+			.populate({
+				path: "studentsEnrolled",
+				populate: {
+					path: "addtionalDetails courses courseProgress",
+				},
+			})
+			.exec();
+
+		if (!courseDetails) {
+			return res.status(400).json({
+				success: false,
+				message: `Course not found with this ${courseId}`,
+			});
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: "Course details fetched successfully",
+			data: courseDetails,
+		});
+	} catch (error) {
+		console.error(error.message);
+		return res.status(500).json({
+			success: false,
+			message: "Error while fetching course details",
+		});
+	}
+};
+
 export { createCourse, getAllCourses };

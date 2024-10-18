@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 const ratingAndReviewSchema = new mongoose.Schema({
 	user: {
@@ -13,6 +13,10 @@ const ratingAndReviewSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		required: true,
+	},
+	course: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Course",
 	},
 });
 

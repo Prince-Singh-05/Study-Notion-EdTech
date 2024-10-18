@@ -38,13 +38,20 @@ const courseSchema = new mongoose.Schema({
 		ref: "Category",
 	},
 	tags: [{ type: String }],
-	studentEnrolled: [
+	studentsEnrolled: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 			required: true,
 		},
 	],
+	instructions: {
+		type: [String],
+	},
+	status: {
+		type: String,
+		enum: ["draft", "published"],
+	},
 });
 
 const Course = mongoose.model("Course", courseSchema);
