@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import sendMAIL from "../utils/nodemailer";
+import emailTemplate from "../mail/templates/emailVerificationTemplate";
 
 const otpSchema = new mongoose.Schema(
 	{
@@ -25,16 +26,19 @@ async function sendVerificationEmail(email, otp) {
 		const mailResponse = await sendMAIL(
 			email,
 			"Verification Email from Study Notion",
-			otp
+			emailTemplate(otp)
 		);
-		console.log("Email sent successfully", mailResponse);
+		console.log("Email sent successfully", mailResponse.response);
 	} catch (error) {
 		console.log("error while sending verification mail ", error.message);
+		throw error;
 	}
 }
 
 otpSchema.pre("save", async function (next) {
-	await sendVerificationEmail(this.email, this.otp);
+	if (this.isNew) {
+		await sendVerificationEmail(this.email, this.otp);
+	}
 	next();
 });
 

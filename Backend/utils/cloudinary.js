@@ -7,7 +7,7 @@ const uploadFileOnCloudinary = async (file, folder, height, quality) => {
 	try {
 		const options = {
 			folder,
-			resourceType: "auto",
+			resource_type: "auto",
 		};
 
 		if (height) {

@@ -5,6 +5,8 @@ import otpGenerator from "otp-generator";
 import bcrypt from "bcrypt";
 import Profile from "../models/profile.model";
 import sendMAIL from "../utils/nodemailer";
+import {} from "dotenv/config";
+import { passwordUpdated } from "../mail/templates/passwordUpdate";
 
 // send otp
 const sendOTP = async (req, res) => {
@@ -15,10 +17,10 @@ const sendOTP = async (req, res) => {
 		// check if user registered with this email & email validation
 		const user = await User.findOne({ email });
 
-		if (!user) {
+		if (user) {
 			return res.status(401).json({
 				success: false,
-				message: "User not registered with this email",
+				message: "User is already registered with this email",
 			});
 		}
 
@@ -31,8 +33,17 @@ const sendOTP = async (req, res) => {
 
 		const prevOTP = await OTP.findOne({ email });
 
+		if (!prevOTP) {
+			await OTP.create({ email, otp });
+
+			return res.status(200).json({
+				success: true,
+				message: "OTP sent successfully!",
+			});
+		}
+
 		// it is a bad approach to check for an unique otp -> try to add some services which generate unique otp each time
-		while (otp === prevOTP) {
+		while (otp === prevOTP.otp) {
 			otp = otpGenerator.generate(6, {
 				upperCaseAlphabets: false,
 				specialChars: false,
@@ -43,16 +54,10 @@ const sendOTP = async (req, res) => {
 		}
 
 		// store this OTP in DB
-		await OTP.findOneAndUpdate(
-			{ email },
-			{
-				otp,
-			},
-			{ new: true }
-		);
+		await OTP.findOneAndUpdate({ email }, { otp });
 
 		// return response
-		res.status(200).json({
+		return res.status(200).json({
 			success: true,
 			message: "OTP sent successfully!",
 		});
@@ -86,7 +91,8 @@ const signup = async (req, res) => {
 			!lastName ||
 			!email ||
 			!password ||
-			!confirmPassword
+			!confirmPassword ||
+			!otp
 		) {
 			res.status(401).json({
 				success: false,
@@ -116,7 +122,7 @@ const signup = async (req, res) => {
 			.sort({ createdAt: -1 })
 			.limit(1);
 
-		if (otp !== recentOTP.otp) {
+		if (otp !== recentOTP[0].otp) {
 			return res.status(400).json({
 				success: false,
 				message: "Invalid OTP",
@@ -155,7 +161,7 @@ const signup = async (req, res) => {
 		console.log(error.message);
 		return res.status(500).json({
 			success: false,
-			message: "Error while registering new user",
+			message: "User cannot be registered. Please try again.",
 		});
 	}
 };
@@ -202,7 +208,7 @@ const login = async (req, res) => {
 			},
 			process.env.JWT_SECRET,
 			{
-				expiresIn: "2h",
+				expiresIn: "24h",
 			}
 		);
 
@@ -224,7 +230,7 @@ const login = async (req, res) => {
 		console.log(error.message);
 		return res.status(500).json({
 			success: false,
-			message: "Error while login of the user",
+			message: "Login failed, please try again.",
 		});
 	}
 };
@@ -234,7 +240,7 @@ const changePassword = async (req, res) => {
 	try {
 		// get data from request's body
 		const { oldPassword, newPassword, confirmNewPassword } = req.body;
-		const { email } = req.cookies.token;
+		const { email } = req.cookies.token; // ensure there is no error in this line
 
 		// perform validation on password, check if password is correct
 		const user = await User.findOne({ email });
@@ -264,18 +270,28 @@ const changePassword = async (req, res) => {
 		}
 
 		// if both matches, then update new password in DB
+		const hashedPassword = await bcrypt.hash(newPassword, 8);
 		const updatedUser = await User.findOneAndUpdate(
 			{ email },
-			{ password: newPassword },
+			{ password: hashedPassword },
 			{ new: true }
 		);
 
 		// send mail for password change to user's email
-		await sendMAIL(
+		const emailResponse = await sendMAIL(
 			updatedUser.email,
-			"Password changed for your Study Notion account",
-			`Hi ${updatedUser.firstName}, your Study Notion account password has been changed. If you are not the one behind this update, please feel free to reset your password at Study Notion website`
+			passwordUpdated(
+				updatedUser.email,
+				`Password updated successfully for ${updatedUser.firstName} ${updatedUser.lastName}`
+			)
 		);
+
+		if (!emailResponse) {
+			return res.status(500).json({
+				success: false,
+				message: "Error while sending email",
+			});
+		}
 
 		// return response
 		return res.status(200).json({

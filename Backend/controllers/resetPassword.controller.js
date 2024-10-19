@@ -1,3 +1,4 @@
+import { passwordUpdated } from "../mail/templates/passwordUpdate";
 import User from "../models/user.model";
 import sendMAIL from "../utils/nodemailer";
 import bcrypt from "bcrypt";
@@ -24,7 +25,11 @@ const resetPasswordToken = async (req, res) => {
 		const url = `http://localhost:3000/reset-password/${token}`;
 
 		// sendMAIL on the email with the above url to reset the password
-		await sendMAIL(email, "Reset Password", `Password reset link: ${url}`);
+		await sendMAIL(
+			email,
+			"Reset Password",
+			passwordUpdated(email, user.firstName)
+		);
 
 		// save token and expiry time in DB
 		await User.findOneAndUpdate(

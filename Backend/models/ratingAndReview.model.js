@@ -5,6 +5,7 @@ const ratingAndReviewSchema = new mongoose.Schema(
 		user: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
+			required: true,
 		},
 		rating: {
 			type: Number,
@@ -18,6 +19,8 @@ const ratingAndReviewSchema = new mongoose.Schema(
 		course: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Course",
+			required: true,
+			index: true,
 		},
 	},
 	{ timestamps: true }

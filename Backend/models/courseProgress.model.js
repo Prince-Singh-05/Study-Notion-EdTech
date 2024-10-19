@@ -6,10 +6,12 @@ const courseProgressSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Course",
 		},
-		completedVideos: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "SubSection",
-		},
+		completedVideos: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "SubSection",
+			},
+		],
 	},
 	{ timestamps: true }
 );

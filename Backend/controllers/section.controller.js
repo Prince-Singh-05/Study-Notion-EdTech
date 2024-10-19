@@ -55,10 +55,15 @@ const getAllSectionsForACourse = async (req, res) => {
 
 		// fetch all sections for a course
 		const courseDetails = await Course.findById(courseId)
-			.populate("courseContent", "sectionName")
+			.populate({
+				path: "courseContent",
+				populate: {
+					path: "subSections",
+				},
+			})
 			.exec();
 
-		const allSections = courseDetails.courseContent.populate("subSections");
+		const allSections = courseDetails.courseContent;
 
 		// return response
 		return res.status(200).json({

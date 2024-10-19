@@ -18,7 +18,7 @@ const auth = async (req, res, next) => {
 		}
 
 		// verify the token with secret
-		const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
+		const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
 		if (!decodedToken) {
 			return res.status(401).json({
@@ -59,7 +59,7 @@ const isStudent = async (req, res, next) => {
 		console.log(error.message);
 		return res.status(403).json({
 			success: false,
-			message: "Error in isStudent middleware",
+			message: "User role cannot be verified, please try again",
 		});
 	}
 };
@@ -85,7 +85,7 @@ const isInstructor = async (req, res, next) => {
 		console.log(error.message);
 		return res.status(403).json({
 			success: false,
-			message: "Error in isInstructor middleware",
+			message: "User role cannot be verified, please try again",
 		});
 	}
 };
@@ -100,7 +100,7 @@ const isAdmin = async (req, res, next) => {
 		if (accountType.toLowerCase() !== "admin") {
 			return res.status(403).json({
 				success: false,
-				message: "Please signin as a admin profile, or create one :)",
+				message: "This route is protected for Admins only",
 			});
 		}
 
@@ -110,7 +110,7 @@ const isAdmin = async (req, res, next) => {
 		console.log(error.message);
 		return res.status(403).json({
 			success: false,
-			message: "Error in isAdmin middleware",
+			message: "User role cannot be verified, please try again",
 		});
 	}
 };

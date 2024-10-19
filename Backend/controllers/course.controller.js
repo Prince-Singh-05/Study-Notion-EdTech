@@ -1,7 +1,7 @@
 import Course from "../models/course.model";
 import Category from "../models/category.model";
 import User from "../models/user.model";
-import uploadImageOnCloudinary from "../utils/cloudinary";
+import uploadFileOnCloudinary from "../utils/cloudinary";
 import {} from "dotenv/config";
 
 const createCourse = async (req, res) => {
@@ -13,6 +13,9 @@ const createCourse = async (req, res) => {
 			whatYouWillLearn,
 			price,
 			categoryId,
+			tag,
+			status,
+			instructions,
 		} = req.body;
 
 		const thumbnail = req.files.thumbnail;
@@ -23,12 +26,18 @@ const createCourse = async (req, res) => {
 			!courseDescription ||
 			!price ||
 			!categoryId ||
-			!whatYouWillLearn
+			!whatYouWillLearn ||
+			!tag ||
+			!thumbnail
 		) {
 			return res.status(400).json({
 				success: false,
 				message: "All field are required",
 			});
+		}
+
+		if (!status || status === undefined) {
+			status = "draft";
 		}
 
 		// instructor id
@@ -45,7 +54,7 @@ const createCourse = async (req, res) => {
 		}
 
 		// upload file to cloudinary
-		const thumbnailImage = await uploadImageOnCloudinary(
+		const thumbnailImage = await uploadFileOnCloudinary(
 			thumbnail,
 			process.env.FOLDER_NAME
 		);
@@ -66,6 +75,9 @@ const createCourse = async (req, res) => {
 			whatYouWillLearn,
 			category: categoryId,
 			thumbnail: thumbnailImage.secure_url,
+			tag,
+			status,
+			instructions,
 		});
 
 		// add course to user model for the instructor account
@@ -104,7 +116,7 @@ const createCourse = async (req, res) => {
 const getAllCourses = async (req, res) => {
 	try {
 		const allCourses = await Course.find({})
-			.populate("tags", "name")
+			.populate("category", "name")
 			.populate("courseContent")
 			.populate("courseContent.subSections")
 			.exec();

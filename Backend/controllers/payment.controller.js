@@ -3,6 +3,7 @@ import User from "../models/user.model";
 import { instance } from "../config/razorpay";
 import mongoose from "mongoose";
 import sendMAIL from "../utils/nodemailer";
+import { courseEnrollmentEmail } from "../mail/templates/courseEnrollmentEmail";
 
 // capture payment and initiate the razorpay order
 const capturePayment = async (req, res) => {
@@ -29,7 +30,7 @@ const capturePayment = async (req, res) => {
 		}
 
 		// check if user already paid for the same course
-		const uid = new mongoose.Schema.Types.ObjectId(userId);
+		const uid = new mongoose.Types.ObjectId(`${userId}`);
 		if (course.studentsEnrolled.includes(uid)) {
 			return res.status(200).json({
 				success: false,
@@ -45,7 +46,7 @@ const capturePayment = async (req, res) => {
 			currency,
 			reciept: Math.random(Date.now()).toString(),
 			notes: {
-				courseId,
+				courseId: course._id,
 				userId,
 			},
 		};
@@ -120,10 +121,10 @@ const verifySignature = async (req, res) => {
 			console.log("Course added in student dashboard");
 
 			// send course purchase confirmation mail
+			const fullName = `${user.firstName} ${user.lastName}`;
 			const emailResponse = await sendMAIL(
 				user.email,
-				"Course Purchase Confirmation",
-				"Congratulations, you are onboard into new Study Notion Course"
+				courseEnrollmentEmail(course.courseName, fullName)
 			);
 
 			return res.status(200).json({

@@ -26,14 +26,14 @@ const createCategory = async (req, res) => {
 		console.log(error.message);
 		return res.status(500).json({
 			success: false,
-			message: "Error while creating a tag",
+			message: "Error while creating a category",
 		});
 	}
 };
 
 const getAllCategories = async (req, res) => {
 	try {
-		const categories = Category.find({});
+		const categories = Category.find({}, { name: true, description: true });
 
 		if (!categories) {
 			return res.status(400).json({
@@ -45,11 +45,12 @@ const getAllCategories = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			message: "All categories fetched successfully",
+			data: categories,
 		});
 	} catch (error) {
 		return res.status(500).json({
 			success: false,
-			message: "Error while fetching tags",
+			message: "Error while fetching categories",
 		});
 	}
 };
@@ -143,9 +144,11 @@ const getCategoryPageDetails = async (req, res) => {
 		);
 
 		// get top-selling courses from all category
-		const topSellingCourses = await Course.find().sort(
-			(a, b) => b.studentsEnrolled.length - a.studentsEnrolled.length
-		);
+		const topSellingCourses = await Course.find()
+			.sort(
+				(a, b) => b.studentsEnrolled.length - a.studentsEnrolled.length
+			)
+			.slice(0, 10); // top 10 courses 
 
 		// return response
 		return res.status(200).json({
