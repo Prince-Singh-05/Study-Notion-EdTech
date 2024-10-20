@@ -3,7 +3,7 @@ import Course from "../models/course.model";
 import mongoose from "mongoose";
 
 // create Rating/Review
-const createRating = async (req, res) => {
+const createReview = async (req, res) => {
 	try {
 		// get data from req body, userId from req.user
 		const { courseId, rating, review } = req.body;
@@ -204,7 +204,7 @@ const getAllReviewsForCourse = async (req, res) => {
 };
 
 export {
-	createRating,
+	createReview,
 	getAverageRating,
 	getAllReviews,
 	getAllReviewsForCourse,
