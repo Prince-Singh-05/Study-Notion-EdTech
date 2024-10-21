@@ -6,7 +6,7 @@ import {
 	isAdmin,
 	isInstructor,
 	isStudent,
-} from "../middlewares/auth.middleware";
+} from "../middlewares/auth.middleware.js";
 
 // Import the Controllers
 
@@ -15,28 +15,28 @@ import {
 	createCourse,
 	getAllCourses,
 	getCourseDetails,
-} from "../controllers/course.controller";
+} from "../controllers/course.controller.js";
 
 // Sections Controllers Import
 import {
 	createSection,
 	deleteSection,
 	updateSection,
-} from "../controllers/section.controller";
+} from "../controllers/section.controller.js";
 
 // Sub-Sections Controllers Import
 import {
 	createSubSection,
 	deleteSubSection,
 	updateSubSection,
-} from "../controllers/subSection.controller";
+} from "../controllers/subSection.controller.js";
 
 // Categories Controllers Import
 import {
 	createCategory,
 	getAllCategories,
 	getCategoryPageDetails,
-} from "../controllers/category.controller";
+} from "../controllers/category.controller.js";
 
 // Rating/Review Controllers Import
 import {
@@ -44,7 +44,7 @@ import {
 	getAllReviews,
 	getAllReviewsForCourse,
 	getAverageRating,
-} from "../controllers/ratingAndReview.controller";
+} from "../controllers/ratingAndReview.controller.js";
 
 const courseRouter = Router();
 

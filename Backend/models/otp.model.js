@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
-import sendMAIL from "../utils/nodemailer";
-import emailTemplate from "../mail/templates/emailVerificationTemplate";
+import sendMAIL from "../utils/nodemailer.js";
+import { otpTemplate } from "../mail/templates/emailVerificationTemplate.js";
 
 const otpSchema = new mongoose.Schema(
 	{
 		email: {
 			type: String,
 			required: true,
+			lowercase: true,
 		},
 		otp: {
 			type: String,
@@ -26,7 +27,7 @@ async function sendVerificationEmail(email, otp) {
 		const mailResponse = await sendMAIL(
 			email,
 			"Verification Email from Study Notion",
-			emailTemplate(otp)
+			otpTemplate(otp)
 		);
 		console.log("Email sent successfully", mailResponse.response);
 	} catch (error) {

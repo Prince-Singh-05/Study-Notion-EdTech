@@ -4,6 +4,7 @@ const courseSchema = new mongoose.Schema(
 	{
 		courseName: {
 			type: String,
+			lowercase: true,
 		},
 		courseDescription: {
 			type: String,
@@ -52,6 +53,7 @@ const courseSchema = new mongoose.Schema(
 		status: {
 			type: String,
 			enum: ["draft", "published"],
+			lowercase: true,
 		},
 	},
 	{ timestamps: true }

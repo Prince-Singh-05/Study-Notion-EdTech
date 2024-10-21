@@ -1,9 +1,9 @@
-import Course from "../models/course.model";
-import User from "../models/user.model";
-import { instance } from "../config/razorpay";
+import Course from "../models/course.model.js";
+import User from "../models/user.model.js";
+import { instance } from "../config/razorpay.js";
 import mongoose from "mongoose";
-import sendMAIL from "../utils/nodemailer";
-import { courseEnrollmentEmail } from "../mail/templates/courseEnrollmentEmail";
+import sendMAIL from "../utils/nodemailer.js";
+import { courseEnrollmentEmail } from "../mail/templates/courseEnrollmentEmail.js";
 
 // capture payment and initiate the razorpay order
 const capturePayment = async (req, res) => {

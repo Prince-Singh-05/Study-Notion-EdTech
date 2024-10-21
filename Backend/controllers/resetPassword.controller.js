@@ -1,5 +1,5 @@
-import User from "../models/user.model";
-import sendMAIL from "../utils/nodemailer";
+import User from "../models/user.model.js";
+import sendMAIL from "../utils/nodemailer.js";
 import bcrypt from "bcrypt";
 
 // resetPasswordToken

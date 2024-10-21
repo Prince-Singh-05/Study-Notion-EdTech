@@ -1,12 +1,12 @@
-import User from "../models/user.model";
-import OTP from "../models/otp.model";
+import User from "../models/user.model.js";
+import OTP from "../models/otp.model.js";
 import jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
 import bcrypt from "bcrypt";
-import Profile from "../models/profile.model";
-import sendMAIL from "../utils/nodemailer";
+import Profile from "../models/profile.model.js";
+import sendMAIL from "../utils/nodemailer.js";
 import {} from "dotenv/config";
-import { passwordUpdated } from "../mail/templates/passwordUpdate";
+import { passwordUpdated } from "../mail/templates/passwordUpdate.js";
 
 // send otp
 const sendOTP = async (req, res) => {
@@ -60,6 +60,7 @@ const sendOTP = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			message: "OTP sent successfully!",
+			otp: otp,
 		});
 	} catch (error) {
 		console.log(error.message);
@@ -122,7 +123,7 @@ const signup = async (req, res) => {
 			.sort({ createdAt: -1 })
 			.limit(1);
 
-		if (otp !== recentOTP[0].otp) {
+		if (otp !== recentOTP.otp) {
 			return res.status(400).json({
 				success: false,
 				message: "Invalid OTP",

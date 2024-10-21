@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import connectCloudinary from "../config/cloudinary";
+import connectCloudinary from "../config/cloudinary.js";
 
 connectCloudinary();
 

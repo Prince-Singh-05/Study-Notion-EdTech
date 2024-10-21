@@ -4,12 +4,12 @@ import {
 	login,
 	signup,
 	sendOTP,
-} from "../controllers/auth.controller";
+} from "../controllers/auth.controller.js";
 import {
 	resetPassword,
 	resetPasswordToken,
-} from "../controllers/resetPassword.controller";
-import { auth } from "../middlewares/auth.middleware";
+} from "../controllers/resetPassword.controller.js";
+import { auth } from "../middlewares/auth.middleware.js";
 
 const userRouter = Router();
 

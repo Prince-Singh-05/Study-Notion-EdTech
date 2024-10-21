@@ -1,7 +1,7 @@
-import User from "../models/user.model";
-import Profile from "../models/profile.model";
+import User from "../models/user.model.js";
+import Profile from "../models/profile.model.js";
 import schedule from "node-schedule";
-import Course from "../models/course.model";
+import Course from "../models/course.model.js";
 
 const updateProfile = async (req, res) => {
 	try {

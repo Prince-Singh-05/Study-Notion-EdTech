@@ -1,7 +1,7 @@
-import Course from "../models/course.model";
-import Category from "../models/category.model";
-import User from "../models/user.model";
-import uploadFileOnCloudinary from "../utils/cloudinary";
+import Course from "../models/course.model.js";
+import Category from "../models/category.model.js";
+import User from "../models/user.model.js";
+import uploadFileOnCloudinary from "../utils/cloudinary.js";
 import {} from "dotenv/config";
 
 const createCourse = async (req, res) => {

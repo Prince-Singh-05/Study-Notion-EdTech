@@ -20,11 +20,13 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			enum: ["admin", "student", "instructor"],
 			required: true,
+			lowercase: true,
 		},
 		email: {
 			type: String,
 			required: true,
 			trim: true,
+			lowercase: true,
 		},
 		additionalDetails: {
 			type: mongoose.Schema.Types.ObjectId,

@@ -1,7 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import {} from "dotenv/config";
 
-exports.connectCloudinary = async () => {
+const connectCloudinary = async () => {
 	try {
 		cloudinary.config({
 			cloud_name: process.env.CLOUD_NAME,
@@ -12,3 +12,5 @@ exports.connectCloudinary = async () => {
 		console.log("Eroor while connecting to cloudinary ", error.message);
 	}
 };
+
+export default connectCloudinary;
