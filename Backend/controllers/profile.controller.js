@@ -132,4 +132,6 @@ const getAllUserDetails = async (req, res) => {
 	}
 };
 
+// updateProfilePicture
+
 export { updateProfile, deleteAccount, getAllUserDetails };

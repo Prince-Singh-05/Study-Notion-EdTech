@@ -90,7 +90,7 @@ const resetPassword = async (req, res) => {
 		const hashedPassword = await bcrypt.hash(password, 8);
 
 		// update the password in DB
-		await User.findByIdAndUpdate({ token }, { password: hashedPassword });
+		await User.findOneAndUpdate({ token }, { password: hashedPassword });
 
 		// return response
 		return res.status(200).json({

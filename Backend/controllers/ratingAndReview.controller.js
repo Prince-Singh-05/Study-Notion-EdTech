@@ -92,7 +92,7 @@ const getAverageRating = async (req, res) => {
 		// find all reviews for the course and aggregate the averageRating
 		const result = await RatingAndReview.aggregate([
 			{
-				$match: { course: mongoose.Types.ObjectId(courseId) },
+				$match: { course: new mongoose.Types.ObjectId(`${courseId}`) },
 			},
 			{
 				$group: { _id: null, averageRating: { $avg: "$rating" } },
@@ -181,7 +181,7 @@ const getAllReviewsForCourse = async (req, res) => {
 			})
 			.exec();
 
-		if (!allRating) {
+		if (!allRating || allRating.length === 0) {
 			return res.status(403).json({
 				success: false,
 				message: "There are no reviews on the course yet",
