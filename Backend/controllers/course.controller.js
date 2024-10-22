@@ -7,13 +7,13 @@ import {} from "dotenv/config";
 const createCourse = async (req, res) => {
 	try {
 		// get data from req.body and file from req.files
-		const {
+		let {
 			courseName,
 			courseDescription,
 			whatYouWillLearn,
 			price,
 			categoryId,
-			tag,
+			tags,
 			status,
 			instructions,
 		} = req.body;
@@ -27,7 +27,7 @@ const createCourse = async (req, res) => {
 			!price ||
 			!categoryId ||
 			!whatYouWillLearn ||
-			!tag ||
+			!tags ||
 			!thumbnail
 		) {
 			return res.status(400).json({
@@ -75,7 +75,7 @@ const createCourse = async (req, res) => {
 			whatYouWillLearn,
 			category: categoryId,
 			thumbnail: thumbnailImage.secure_url,
-			tag,
+			tags,
 			status,
 			instructions,
 		});
@@ -103,6 +103,7 @@ const createCourse = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			message: "New Course added successfully",
+			data: newCourse,
 		});
 	} catch (error) {
 		console.error(error.message);
@@ -148,6 +149,7 @@ const getCourseDetails = async (req, res) => {
 		const courseDetails = await Course.findById(courseId)
 			.populate({
 				path: "instructor",
+				select: "-password -token -resetPasswordExpiry",
 				populate: {
 					path: "additionalDetails",
 				},

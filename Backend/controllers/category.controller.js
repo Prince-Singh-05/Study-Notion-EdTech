@@ -1,4 +1,5 @@
 import Category from "../models/category.model.js";
+import Course from "../models/course.model.js";
 
 const createCategory = async (req, res) => {
 	try {
@@ -33,7 +34,10 @@ const createCategory = async (req, res) => {
 
 const getAllCategories = async (req, res) => {
 	try {
-		const categories = Category.find({}, { name: true, description: true });
+		const categories = await Category.find(
+			{},
+			{ name: true, description: true }
+		);
 
 		if (!categories) {
 			return res.status(400).json({
@@ -144,11 +148,14 @@ const getCategoryPageDetails = async (req, res) => {
 		);
 
 		// get top-selling courses from all category
-		const topSellingCourses = await Course.find()
+
+		const allCourses = await Course.find();
+
+		const topSellingCourses = allCourses
 			.sort(
 				(a, b) => b.studentsEnrolled.length - a.studentsEnrolled.length
 			)
-			.slice(0, 10); // top 10 courses 
+			.slice(0, 10); // top 10 courses
 
 		// return response
 		return res.status(200).json({
