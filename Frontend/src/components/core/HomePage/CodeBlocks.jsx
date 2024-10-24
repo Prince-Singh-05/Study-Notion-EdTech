@@ -2,6 +2,7 @@ import React from "react";
 import CTAButton from "./Button";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { TypeAnimation } from "react-type-animation";
+import Ellipse2 from "../../../assets/Ellipse 2.png";
 
 const CodeBlocks = ({
 	position,
@@ -17,7 +18,7 @@ const CodeBlocks = ({
 		<div className={`flex ${position} my-20 justify-center gap-10`}>
 			{/* Section 1 */}
 			<div className="w-[50%] flex flex-col gap-8">
-				{heading}
+				<h2 className="text-4xl font-semibold">{heading}</h2>
 				<div className="text-richblack-300 font-bold">{subHeading}</div>
 				<div className="flex gap-7 mt-7">
 					<CTAButton active={ctabtn1.active} linkto={ctabtn1.linkto}>
@@ -35,9 +36,13 @@ const CodeBlocks = ({
 			</div>
 
 			{/* Section 2 */}
-			<div className="h-fit flex text-[10px] w-[100%] py-4 lg:w-[500px]">
+			<div className="h-fit flex text-[10px] w-[100%] p-2 gap-2 lg:w-[500px] relative border-2 border-transparent">
 				{/* add gradient in bg */}
-				<div className="text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold">
+				<div className="absolute -top-[100px] -left-[100px]">
+					<img src={Ellipse2} />
+				</div>
+
+				<div className="text-center flex flex-col w-fit text-richblack-400 font-mono text-sm font-bold px-1">
 					<p>1</p>
 					<p>2</p>
 					<p>3</p>
@@ -53,7 +58,7 @@ const CodeBlocks = ({
 				</div>
 
 				<div
-					className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-2`}
+					className={`w-[90%] flex flex-col gap-2 font-bold font-mono text-sm ${codeColor}`}
 				>
 					<TypeAnimation
 						sequence={[codeBlock, 5000, ""]}
