@@ -7,7 +7,7 @@ const tabsName = [
 	"Free",
 	"New to coding",
 	"Most popular",
-	"Skill paths",
+	"Skills paths",
 	"Career paths",
 ];
 

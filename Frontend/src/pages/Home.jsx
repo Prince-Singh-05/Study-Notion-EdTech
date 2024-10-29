@@ -15,7 +15,7 @@ const Home = () => {
 	return (
 		<div>
 			{/* Section 1 */}
-			<section className="flex relative mx-auto flex-col w-11/12 items-center text-white justify-center max-w-maxContent">
+			<section className="flex relative mx-auto flex-col lg:w-11/12 items-center text-white justify-center max-w-maxContent">
 				{/* Top Section */}
 				<div className="flex flex-col items-center">
 					<Link to={"/signup"}>
