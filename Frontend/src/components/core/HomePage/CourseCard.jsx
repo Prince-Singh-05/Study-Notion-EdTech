@@ -5,7 +5,7 @@ import { PiTreeViewFill } from "react-icons/pi";
 const CourseCard = ({ currentCard, setCurrentCard, cardData }) => {
 	return (
 		<div
-			className={`flex flex-col flex-1 h-[300px] select-none justify-between ${
+			className={`flex flex-col flex-1 md:h-[300px] h-fit select-none justify-between ${
 				currentCard === cardData.heading
 					? "bg-white text-richblack-900 shadow-[12px_12px_0px_0px_#f6e05e]"
 					: "bg-richblack-800 text-white"

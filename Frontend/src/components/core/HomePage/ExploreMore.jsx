@@ -52,10 +52,10 @@ const ExploreMore = () => {
 				})}
 			</div>
 
-			<div className="lg:h-[250px]"></div>
+			<div className="md:h-[250px]"></div>
 
 			{/* Course Cards  */}
-			<div className="flex gap-10 justify-between w-11/12 absolute lg:bottom-[50px] lg:translate-y-[45%]">
+			<div className="flex gap-10 justify-between w-11/12 absolute md:bottom-[50px] md:translate-y-[45%]">
 				{courses.map((element, index) => {
 					return (
 						<CourseCard

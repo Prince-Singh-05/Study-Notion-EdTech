@@ -122,7 +122,10 @@ const Navbar = () => {
 					) : (
 						<div className="flex justify-between gap-4">
 							<Link to={"/login"}>
-								<button className="border border-richblack-700 bg-richblack-800 px-3 py-2 text-richblack-100 rounded-md">
+								<button
+									className="border border-richblack-700 bg-richblack-800 px-3 py-2 text-richblack-100 rounded-md"
+									// title="Please Login here"
+								>
 									Login
 								</button>
 							</Link>
