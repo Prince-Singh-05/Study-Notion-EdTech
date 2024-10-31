@@ -38,7 +38,7 @@ const Navbar = () => {
 		<div className="w-full flex h-14 items-center border-b border-richblack-700">
 			<div className="flex w-11/12 max-w-maxContent mx-auto items-center justify-between">
 				{/* Logo */}
-				<Link to={"/signup"}>
+				<Link to={"/"}>
 					<img src={logo} width={160} height={32} />
 				</Link>
 
