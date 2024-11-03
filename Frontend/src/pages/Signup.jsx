@@ -1,7 +1,7 @@
 import React from "react";
 import Template from "../components/core/Auth/Template";
 import signupImg from "../assets/Images/signup.webp";
-import instructorImg from "../assets/Images/instructorImg.jpg";
+import InstructorSignup from "../assets/Images/InstructorSignup.jpg";
 
 const Signup = () => {
 	return (
@@ -12,7 +12,7 @@ const Signup = () => {
 			desc1={"Build skills for today, tomorrow, and beyond."}
 			desc2={"Education to future-proof your career."}
 			imageStudent={signupImg}
-			imageInstructor={instructorImg}
+			imageInstructor={InstructorSignup}
 			formType={"signup"}
 		/>
 	);

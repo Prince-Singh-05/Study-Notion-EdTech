@@ -30,6 +30,10 @@ const Navbar = () => {
 		}
 	};
 
+	console.log("User: ", user);
+	console.log("Token: ", token);
+	console.log("Local Storage token: ", localStorage.getItem("token"));
+
 	useEffect(() => {
 		fetchSubLinks();
 	}, []);
@@ -108,13 +112,18 @@ const Navbar = () => {
 				{/* login/signup/dashboard */}
 				<div className="flex gap-x-4 items-center">
 					{user && user.accountType !== "instructor" ? (
-						<Link to={"/dashboard/cart"} className="relative">
-							<GrCart />
-							{totalItems > 0 && <div>{totalItems}</div>}
-						</Link>
+						<div className="flex gap-x-4 items-center">
+							<div className="w-[25px] h-[25px]">
+								<IoSearchSharp className="text-white text-2xl cursor-pointer" />
+							</div>
+							<Link to={"/dashboard/cart"} className="relative">
+								<GrCart className="text-white w-[23px] h-[23px]" />
+								{totalItems > 0 && <div>{totalItems}</div>}
+							</Link>
+						</div>
 					) : (
-						<div>
-							<IoSearchSharp />
+						<div className="w-[25px] h-[25px]">
+							<IoSearchSharp className="text-white text-2xl cursor-pointer" />
 						</div>
 					)}
 					{token !== null ? (

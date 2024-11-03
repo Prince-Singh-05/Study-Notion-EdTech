@@ -4,6 +4,10 @@ import Home from "./pages/Home";
 import Navbar from "./components/common/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import NotFound from "./pages/NotFound";
+import ForgotPassword from "./pages/ForgotPassword";
+import UpdatePassword from "./pages/UpdatePassword";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
 	return (
@@ -13,6 +17,13 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
+				<Route path="/reset-password" element={<ForgotPassword />} />
+				<Route
+					path="/reset-password/:id"
+					element={<UpdatePassword />}
+				/>
+				<Route path="/verify-email" element={<VerifyEmail />} />
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</div>
 	);

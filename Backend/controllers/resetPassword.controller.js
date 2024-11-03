@@ -1,6 +1,9 @@
 import User from "../models/user.model.js";
 import sendMAIL from "../utils/nodemailer.js";
 import bcrypt from "bcrypt";
+import {} from "dotenv/config.js";
+
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // resetPasswordToken
 const resetPasswordToken = async (req, res) => {
@@ -21,7 +24,7 @@ const resetPasswordToken = async (req, res) => {
 		const token = crypto.randomUUID();
 
 		// create frontend url
-		const url = `http://localhost:3000/reset-password/${token}`;
+		const url = `${FRONTEND_URL}/reset-password/${token}`;
 
 		// sendMAIL on the email with the above url to reset the password
 		await sendMAIL(

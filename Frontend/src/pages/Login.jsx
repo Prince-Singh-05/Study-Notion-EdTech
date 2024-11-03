@@ -1,6 +1,6 @@
 import Template from "../components/core/Auth/Template.jsx";
 import loginImg from "../assets/Images/login.webp";
-import instructorImg from "../assets/Images/instructorImg.jpg";
+import InstructorLogin from "../assets/Images/InstructorLogin.jpg";
 
 const Login = () => {
 	return (
@@ -9,7 +9,7 @@ const Login = () => {
 			desc1={"Build skills for today, tomorrow, and beyond."}
 			desc2={"Education to future-proof your career."}
 			imageStudent={loginImg}
-			imageInstructor={instructorImg}
+			imageInstructor={InstructorLogin}
 			formType={"login"}
 		/>
 	);

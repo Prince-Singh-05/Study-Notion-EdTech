@@ -3,8 +3,11 @@ import toast from "react-hot-toast";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { sendotp } from "../../../services/operations/authAPI";
+import { setSignupData } from "../../../redux/slices/authSlice";
+import { ACCOUNT_TYPE } from "../../../utils/constant";
 
-const SignupForm = ({ accountType }) => {
+const SignupForm = ({ accountType, setAccountType }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -40,6 +43,23 @@ const SignupForm = ({ accountType }) => {
 			...formData,
 			accountType,
 		};
+
+		// first storing signup data in authSlice,
+		// then after email verification on "/verify-email" endpoint we navigate to "/signup" endpoint
+		dispatch(setSignupData(signupData));
+
+		// send otp to user's email for varification
+		dispatch(sendotp(email, navigate));
+
+		// Reset form
+		setFormData({
+			firstName: "",
+			lastName: "",
+			email: "",
+			password: "",
+			confirmPassword: "",
+		});
+		setAccountType(ACCOUNT_TYPE.STUDENT);
 	};
 
 	return (

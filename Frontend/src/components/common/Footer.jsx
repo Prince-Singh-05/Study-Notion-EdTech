@@ -149,8 +149,8 @@ const Footer = () => {
 					</div>
 					<div>
 						Made with{" "}
-						<span className="text-pink-500 text-lg">♥</span>{" "}
-						CodeHelp © 2023 Studynotion
+						<span className="text-pink-500 text-lg">♥</span> by
+						Prince SIngh © 2024 StudyNotion
 					</div>
 				</div>
 			</div>

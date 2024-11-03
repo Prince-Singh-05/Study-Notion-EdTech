@@ -59,7 +59,10 @@ const Template = ({
 				</div>
 
 				{formType === "signup" ? (
-					<SignupForm accountType={accountType} />
+					<SignupForm
+						accountType={accountType}
+						setAccountType={setAccountType}
+					/>
 				) : (
 					<LoginForm accountType={accountType} />
 				)}
@@ -86,7 +89,7 @@ const Template = ({
 						width={558}
 						height={504}
 						loading="lazy"
-						className="absolute -top-4 right-4 z-10"
+						className="absolute object-cover w-[100%] h-[100%] -top-[16px] right-[16px] z-10"
 						// there is problem with image size
 					/>
 				) : (
@@ -96,7 +99,7 @@ const Template = ({
 						width={558}
 						height={504}
 						loading="lazy"
-						className="absolute -top-4 right-4 z-10"
+						className="absolute object-cover w-[100%] h-[100%] -top-[16px] right-[16px] z-10"
 					/>
 				)}
 				<img

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { login } from "../../../services/operations/authAPI";
 
 const LoginForm = ({ accountType }) => {
 	const navigate = useNavigate();
@@ -22,7 +23,7 @@ const LoginForm = ({ accountType }) => {
 
 	const handleOnSubmit = (e) => {
 		e.preventDefault();
-		dispatch();
+		dispatch(login(formData.email, formData.password, navigate));
 	};
 
 	return (

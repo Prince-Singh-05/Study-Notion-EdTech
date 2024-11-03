@@ -7,7 +7,7 @@ import { logout } from "../../../services/operations/authAPI";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
 const ProfileDropDown = () => {
-	const user = useSelector((state) => state.profile);
+	const { user } = useSelector((state) => state.profile);
 	const profileRef = useRef(null);
 	const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
@@ -19,7 +19,11 @@ const ProfileDropDown = () => {
 
 	return (
 		<div className="relative">
-			<button onClick={() => setOpen(true)} ref={profileRef}>
+			<button
+				onClick={() => setOpen(true)}
+				ref={profileRef}
+				className="flex items-center"
+			>
 				<img
 					src={user?.image}
 					alt="Profile Picture"
@@ -34,7 +38,7 @@ const ProfileDropDown = () => {
 				>
 					<Link
 						to={"/dashboard/my-profile"}
-						onClick={() => setOpen(false)}
+						// onClick={() => setOpen(false)}
 					>
 						<div className="flex gap-1 w-full items-center border-b-[1px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25 px-[12px] py-[10px]">
 							<MdSpaceDashboard />
@@ -42,16 +46,16 @@ const ProfileDropDown = () => {
 						</div>
 					</Link>
 
-					<div
+					<button
 						onClick={() => {
 							dispatch(logout(navigate));
-							setOpen(false);
+							// setOpen(false);
 						}}
-						className="flex gap-1 w-full items-center text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25 px-[12px] py-[10px]"
+						className="flex gap-1 w-full items-center text-sm cursor-pointer text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25 px-[12px] py-[10px]"
 					>
 						<MdOutlineLogout />
 						<p>Logout</p>
-					</div>
+					</button>
 				</div>
 			)}
 		</div>

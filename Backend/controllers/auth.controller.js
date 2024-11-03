@@ -226,6 +226,7 @@ const login = async (req, res) => {
 				success: true,
 				message: "User Loged in successfully, token saved in cookie",
 				user,
+				token,
 			});
 	} catch (error) {
 		console.log(error.message);
