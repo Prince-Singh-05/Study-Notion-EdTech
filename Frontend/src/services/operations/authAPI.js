@@ -126,7 +126,6 @@ export function login(email, password, navigate) {
 
 export function logout(navigate) {
 	return (dispatch) => {
-		console.log("Inside logout api call");
 		dispatch(setUser(null));
 		dispatch(setToken(null));
 		dispatch(resetCart());

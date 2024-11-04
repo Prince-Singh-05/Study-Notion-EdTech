@@ -30,10 +30,6 @@ const Navbar = () => {
 		}
 	};
 
-	console.log("User: ", user);
-	console.log("Token: ", token);
-	console.log("Local Storage token: ", localStorage.getItem("token"));
-
 	useEffect(() => {
 		fetchSubLinks();
 	}, []);
