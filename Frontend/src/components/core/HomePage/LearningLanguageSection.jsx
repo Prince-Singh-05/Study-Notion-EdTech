@@ -1,5 +1,5 @@
 import React from "react";
-import HighlightText from "./HighlightText";
+import HighlightText from "../../common/HighlightText";
 import knowYourProgress from "../../../assets/Images/Know_your_progress.png";
 import compareWithOthers from "../../../assets/Images/Compare_with_others.png";
 import planYourLessons from "../../../assets/Images/Plan_your_lessons.png";
@@ -9,8 +9,11 @@ const LearningLanguageSection = () => {
 	return (
 		<div className="flex flex-col gap-5 mt-[130px] items-center mb-20">
 			<div className="text-4xl font-semibold text-center">
-				Your Swiss Knife for
-				<HighlightText text={"learning any language"} />
+				Your Swiss Knife for{" "}
+				<HighlightText
+					text={"learning any language"}
+					gradient={`bg-gradient-to-r from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB]`}
+				/>
 			</div>
 
 			<div className="text-center text-richblack-600 mx-auto text-base font-medium w-[85%]">

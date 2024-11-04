@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
-import HighlightText from "../components/core/HomePage/HighlightText.jsx";
+import HighlightText from "../components/common/HighlightText.jsx";
 import CTAButton from "../components/core/HomePage/Button.jsx";
 import Banner from "../assets/Images/banner.mp4";
 import CodeBlocks from "../components/core/HomePage/CodeBlocks.jsx";
@@ -15,7 +15,7 @@ const Home = () => {
 	return (
 		<div>
 			{/* Section 1 */}
-			<section className="flex relative mx-auto flex-col lg:w-11/12 items-center text-white justify-center max-w-maxContent">
+			<section className="flex relative mx-auto flex-col lg:w-11/12 items-center text-richblack-5 justify-center max-w-maxContent">
 				{/* Top Section */}
 				<div className="flex flex-col items-center">
 					<Link to={"/signup"}>
@@ -28,7 +28,12 @@ const Home = () => {
 					</Link>
 					<h2 className="text-center text-4xl font-semibold mt-7">
 						Empower Your Future with
-						<HighlightText text={"Coding Skills"} />
+						<HighlightText
+							text={"Coding Skills"}
+							gradient={
+								"bg-gradient-to-r from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB]"
+							}
+						/>
 					</h2>
 					<p className="mt-4 w-[90%] text-center text-lg font-bold text-richblack-300 mx-auto">
 						With our online coding courses, you can learn at your
@@ -60,8 +65,13 @@ const Home = () => {
 						heading={
 							<div>
 								Unlock your{" "}
-								<HighlightText text={"coding potential"} /> with
-								our online courses.
+								<HighlightText
+									text={"coding potential"}
+									gradient={
+										"bg-gradient-to-r from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB]"
+									}
+								/>{" "}
+								with our online courses.
 							</div>
 						}
 						subHeading={
@@ -89,7 +99,12 @@ const Home = () => {
 						heading={
 							<div>
 								Start{" "}
-								<HighlightText text={"coding in seconds"} />
+								<HighlightText
+									text={"coding in seconds"}
+									gradient={
+										"bg-gradient-to-r from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB]"
+									}
+								/>
 							</div>
 						}
 						subHeading={
@@ -119,7 +134,7 @@ const Home = () => {
 				<div className="homepage_bg h-[310px]">
 					<div className="w-11/12 max-w-maxContent flex flex-col items-center gap-5 justify-between mx-auto">
 						<div className="h-[150px]"></div>
-						<div className="flex gap-7 text-white mx-auto">
+						<div className="flex gap-7 text-richblack-5 mx-auto">
 							<CTAButton active={true} linkto={"/signup"}>
 								<div className="flex items-center gap-2">
 									Explore Full Catalog <FaArrowRightLong />
@@ -136,7 +151,12 @@ const Home = () => {
 					<div className="flex gap-3 mb-10 mt-[100px]">
 						<div className="text-4xl font-semibold w-[50%]">
 							Get the skills you need for a
-							<HighlightText text={"Job that is in demand"} />
+							<HighlightText
+								text={"Job that is in demand"}
+								gradient={
+									"bg-gradient-to-r from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB]"
+								}
+							/>
 						</div>
 						<div className="flex flex-col w-[50%] gap-10">
 							<p className="text-[16px]">

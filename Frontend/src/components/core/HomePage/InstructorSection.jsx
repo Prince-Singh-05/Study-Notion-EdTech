@@ -1,6 +1,6 @@
 import React from "react";
 import Instructor from "../../../assets/Images/Instructor.png";
-import HighlightText from "./HighlightText";
+import HighlightText from "../../common/HighlightText.jsx";
 import CTAButton from "./Button.jsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 
@@ -18,7 +18,10 @@ const InstructorSection = () => {
 			<div className="flex flex-col w-[50%] gap-2">
 				<div className="text-4xl font-semibold">
 					Become an <br />
-					<HighlightText text={"Instructor"} />
+					<HighlightText
+						text={"Instructor"}
+						gradient={`bg-gradient-to-r from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB]`}
+					/>
 				</div>
 				<p className="font-medium text-[16px] w-[90%]">
 					Instructors from around the world teach millions of students

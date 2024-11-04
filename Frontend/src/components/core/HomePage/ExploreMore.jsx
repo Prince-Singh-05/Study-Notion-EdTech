@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HomePageExplore } from "../../../data/homepage-explore.js";
-import HighlightText from "./HighlightText";
+import HighlightText from "../../common/HighlightText.jsx";
 import CourseCard from "./CourseCard.jsx";
 
 const tabsName = [
@@ -28,7 +28,13 @@ const ExploreMore = () => {
 	return (
 		<div className="flex flex-col items-center">
 			<div className="text-4xl font-semibold">
-				Unlock the <HighlightText text={"Power of Code"} />
+				Unlock the{" "}
+				<HighlightText
+					text={"Power of Code"}
+					gradient={
+						"bg-gradient-to-r from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB]"
+					}
+				/>
 			</div>
 			<p className="text-center text-richblack-300 text-[16px] mt-3">
 				Learn to build anything you can imagine
