@@ -185,7 +185,7 @@ const About = () => {
 				<LearningGrid />
 
 				{/* Contact Us Form */}
-				<div>
+				<div className="w-[50%] mx-auto">
 					<h2 className="text-[36px] font-semibold leading-[44px] text-center">
 						Get in Touch
 					</h2>

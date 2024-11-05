@@ -41,7 +41,7 @@ const ContactUsForm = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(submitForm)}
-			className="flex flex-col gap-y-4 w-[50%] mx-auto p-8"
+			className="flex flex-col gap-y-4"
 		>
 			<div className="flex gap-x-4">
 				{/* First Name */}
@@ -184,7 +184,7 @@ const ContactUsForm = () => {
 					id="message"
 					name="message"
 					cols={30}
-					rows={7}
+					rows={5}
 					placeholder="Enter your message here...."
 					{...register("message", { required: true })}
 					style={{
