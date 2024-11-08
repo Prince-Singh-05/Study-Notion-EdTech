@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import frame from "../../../assets/Images/frame.png";
 import LoginForm from "./LoginForm.jsx";
 import SignupForm from "./SignupForm.jsx";
-import { ACCOUNT_TYPE } from "../../../utils/constant.js";
+import { ACCOUNT_TYPE } from "../../../utils/constants.js";
 import Tab from "../../common/Tab.jsx";
 import { FcGoogle } from "react-icons/fc";
 

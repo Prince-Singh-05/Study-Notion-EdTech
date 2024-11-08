@@ -27,7 +27,7 @@ const Home = () => {
 						</div>
 					</Link>
 					<h2 className="text-center text-4xl font-semibold mt-7">
-						Empower Your Future with
+						Empower Your Future with{" "}
 						<HighlightText
 							text={"Coding Skills"}
 							gradient={
@@ -150,7 +150,7 @@ const Home = () => {
 				<div className="flex flex-col max-w-maxContent w-11/12 mx-auto justify-center items-center gap-7">
 					<div className="flex gap-3 mb-10 mt-[100px]">
 						<div className="text-4xl font-semibold w-[50%]">
-							Get the skills you need for a
+							Get the skills you need for a{" "}
 							<HighlightText
 								text={"Job that is in demand"}
 								gradient={

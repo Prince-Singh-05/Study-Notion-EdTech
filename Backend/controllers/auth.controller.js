@@ -181,7 +181,11 @@ const login = async (req, res) => {
 			});
 		}
 
-		const user = await User.findOne({ email }); // check if other fields can be removed from user
+		const user = await User.findOne({ email })
+			.populate("additionalDetails")
+			// .populate("courseProgress")
+			.populate("courses")
+			.exec(); // check if other fields can be removed from user
 
 		if (!user) {
 			return res.status(403).json({

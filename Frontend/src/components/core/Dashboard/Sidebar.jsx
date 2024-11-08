@@ -5,6 +5,7 @@ import SidebarLink from "./SidebarLink.jsx";
 import { useNavigate } from "react-router-dom";
 import { VscSignOut } from "react-icons/vsc";
 import ConfirmationModal from "../../common/ConfirmationModal.jsx";
+import { logout } from "../../../services/operations/authAPI.js";
 
 const Sidebar = () => {
 	const { user, loading: profileLoading } = useSelector(
@@ -17,7 +18,7 @@ const Sidebar = () => {
 	const [confirmationModal, setConfirmationModal] = useState(null);
 
 	return (
-		<div>
+		<div className="text-richblack-5 w-56">
 			{profileLoading || authLoading ? (
 				<div className="spinner">Loading...</div>
 			) : (
@@ -37,7 +38,7 @@ const Sidebar = () => {
 					<div className="flex flex-col">
 						<SidebarLink
 							link={{
-								name: Setting,
+								name: "Setting",
 								path: "/dashboard/settings",
 								icon: "VscSettings",
 							}}
@@ -65,7 +66,9 @@ const Sidebar = () => {
 						</button>
 					</div>
 
-					{confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
+					{confirmationModal && (
+						<ConfirmationModal modalData={confirmationModal} />
+					)}
 				</div>
 			)}
 		</div>

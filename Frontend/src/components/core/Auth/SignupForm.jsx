@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { sendotp } from "../../../services/operations/authAPI";
 import { setSignupData } from "../../../redux/slices/authSlice";
-import { ACCOUNT_TYPE } from "../../../utils/constant";
+import { ACCOUNT_TYPE } from "../../../utils/constants";
 
 const SignupForm = ({ accountType, setAccountType }) => {
 	const navigate = useNavigate();

@@ -10,6 +10,9 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
 
 function App() {
 	return (
@@ -27,6 +30,20 @@ function App() {
 				<Route path="/verify-email" element={<VerifyEmail />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/contact" element={<ContactUs />} />
+				{/* <Routes path="/dashboard"> */}
+				<Route
+					element={
+						<PrivateRoute>
+							<Dashboard />
+						</PrivateRoute>
+					}
+				>
+					<Route
+						path="/dashboard/my-profile"
+						element={<MyProfile />}
+					/>
+				</Route>
+				{/* </Routes> */}
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</div>
