@@ -7,7 +7,7 @@ const auth = async (req, res, next) => {
 		// get token from cookie, authorization header or request's body
 		const token =
 			req.cookies.token ||
-			req.headers("Authorization").replace("Bearer ", "") ||
+			req.header("Authorization").replace("Bearer ", "") ||
 			req.body.token;
 
 		if (!token) {
@@ -34,7 +34,9 @@ const auth = async (req, res, next) => {
 	} catch (error) {
 		return res.status(401).json({
 			success: true,
-			message: "Error in auth middleware, user verification unsuccessful",
+			message:
+				"Error in auth middleware, user verification unsuccessful" +
+				` ${error.message}`,
 		});
 	}
 };
