@@ -14,7 +14,9 @@ const Dashboard = () => {
 			) : (
 				<div className="flex h-full">
 					<Sidebar />
-					<Outlet />
+					<div className="mt-14 flex-1 lg:ml-[14rem]">
+						<Outlet />
+					</div>
 				</div>
 			)}
 		</div>
