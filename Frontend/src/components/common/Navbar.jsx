@@ -35,11 +35,11 @@ const Navbar = () => {
 	}, []);
 
 	return (
-		<div className="w-full flex h-14 items-center border-b border-richblack-700">
+		<div className="w-full flex h-14 items-center border-b border-richblack-700 bg-richblack-900 fixed top-0 z-10">
 			<div className="flex w-11/12 max-w-maxContent mx-auto items-center justify-between">
 				{/* Logo */}
 				<Link to={"/"}>
-					<img src={logo} width={160} height={32} />
+					<img src={logo} width={160} height={42} loading="lazy" />
 				</Link>
 
 				{/* Nav Links */}
@@ -49,12 +49,12 @@ const Navbar = () => {
 							return (
 								<li key={index}>
 									{link.title === "Catalog" ? (
-										<div className="relative flex group">
+										<div className="relative group">
 											<div className="flex items-center gap-2 cursor-pointer">
 												<p>{link.title}</p>
 												<IoIosArrowDown />
 											</div>
-											<div className="lg:w-[300px] lg:h-fit bg-richblack-5 rounded-lg lg:p-4 z-10 absolute hidden opacity-0 top-[50%] left-[50%] translate-y-[12%] translate-x-[-50%] group-hover:block group-hover:opacity-100 transition-all duration-200">
+											<div className="lg:w-[300px] bg-richblack-5 rounded-lg lg:p-4 z-50 absolute hidden opacity-0 top-[50%] left-[50%] translate-y-[12%] translate-x-[-50%] group-hover:block group-hover:opacity-100 transition-all duration-200">
 												<div className="w-6 h-6 bg-richblack-5 rounded-sm -z-10 absolute -top-[5%] left-[50%] translate-x-[90%] rotate-45"></div>
 												{isLoading ? (
 													<div className="text-richblack-500 capitalize py-4 px-3">
@@ -89,7 +89,7 @@ const Navbar = () => {
 											className={({ isActive }) =>
 												isActive
 													? "text-yellow-100"
-													: "text-white"
+													: "text-richblack-25"
 											}
 										>
 											<p

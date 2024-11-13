@@ -9,14 +9,14 @@ const Stats = [
 
 const StatsComponent = () => {
 	return (
-		<div className="flex lg:w-11/12 mx-auto items-center text-richblack-5 justify-around max-w-maxContent py-24 gap-x-3">
+		<div className="grid grid-cols-2 md:grid-cols-4 w-11/12 mx-auto text-richblack-5 justify-between max-w-maxContent py-24 gap-10 text-center">
 			{Stats.map((element, index) => {
 				return (
 					<div
 						key={index}
 						className="flex flex-col gap-y-2 text-center"
 					>
-						<h2 className="font-semibold text-[36px] leading-[44px] font-inter">
+						<h2 className="font-semibold text-4xl font-inter">
 							{element.count}
 						</h2>
 						<p className="text-base font-medium text-richblack-300">
