@@ -16,10 +16,11 @@ export const profileEndpoints = {
 };
 
 // Settings Page API
-export const settingsEndpoints = {
-	UPDATE_PRFILE_API: BASE_URL + "/profile/updateProfile",
+export const settingEndpoints = {
+	UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
 	CHANGE_PASSWORD_API: BASE_URL + "/auth/change-password",
 	DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
+	UPDATE_PROFILE_PICTURE_API: BASE_URL + "/profile/updateProfilePicture",
 };
 
 // Categories API
