@@ -15,9 +15,11 @@ const CodeBlocks = ({
 	codeBlock,
 }) => {
 	return (
-		<div className={`flex ${position} my-20 justify-center gap-10`}>
+		<div
+			className={`flex ${position} lg:my-20 my-10 justify-between items-center md:items-start gap-10`}
+		>
 			{/* Section 1 */}
-			<div className="w-[50%] flex flex-col gap-8">
+			<div className="lg:w-[50%] flex flex-col gap-8">
 				<h2 className="text-4xl font-semibold">{heading}</h2>
 				<div className="text-richblack-300 font-bold">{subHeading}</div>
 				<div className="flex gap-7 mt-7">
