@@ -12,13 +12,13 @@ import LearningGrid from "../components/core/AboutPage/LearningGrid.jsx";
 
 const About = () => {
 	return (
-		<div>
+		<div className="mt-14">
 			{/* Section 1 */}
 			<section className="bg-richblack-800">
-				<div className="flex relative mx-auto flex-col lg:w-11/12 items-center text-white justify-around max-w-maxContent h-[34rem]">
-					<div className="text-center mx-auto flex flex-col gap-4 w-[913px] px-14">
-						<h2 className="font-semibold text-[36px] leading-[44px] font-inter">
-							Driving Innovation in Online Education for a <br />
+				<div className="flex relative mx-auto flex-col w-11/12 items-center text-richblack-5 justify-between max-w-maxContent gap-10">
+					<div className="text-center mx-auto flex flex-col gap-4 lg:w-[70%] py-20">
+						<h2 className="font-semibold text-4xl font-inter">
+							Driving Innovation in Online Education for a{" "}
 							<HighlightText
 								text={"Brighter Future"}
 								gradient={
@@ -26,7 +26,7 @@ const About = () => {
 								}
 							/>
 						</h2>
-						<p className="text-base font-medium text-richblack-300">
+						<p className="text-base font-medium text-richblack-300 lg:w-[95%]">
 							Studynotion is at the forefront of driving
 							innovation in online education. We're passionate
 							about creating a brighter future by offering
@@ -36,9 +36,9 @@ const About = () => {
 						</p>
 					</div>
 
-					<div className="max-w-maxContent h-32"></div>
+					<div className="sm:h-[70px] lg:h-[150px]"></div>
 
-					<div className="flex gap-x-6 absolute bottom-[-15%]">
+					<div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
 						<img src={aboutus1} alt="About us image 1" />
 						<img src={aboutus2} alt="About us image 2" />
 						<img src={aboutus3} alt="About us image 3" />
@@ -47,9 +47,9 @@ const About = () => {
 			</section>
 
 			{/* Section 2 */}
-			<div className="py-24 mt-20 border-b border-richblack-700">
-				<section className="flex flex-col lg:w-11/12 mx-auto items-center text-richblack-5 justify-center max-w-maxContent">
-					<div className="flex relative text-[36px] leading-[52px] text-center font-semibold">
+			<div className="md:py-24 pb-14 mt-20 border-b border-richblack-700">
+				<section className="flex flex-col w-11/12 mx-auto items-center text-richblack-5 justify-between max-w-maxContent">
+					<div className="flex relative text-xl md:text-4xl text-center font-semibold">
 						{/* <RiDoubleQuotesL className="absolute" /> */}
 						<p>
 							We are passionate about revolutionizing the way we
@@ -81,12 +81,12 @@ const About = () => {
 			</div>
 
 			{/* Section 3 */}
-			<section className="flex relative mx-auto flex-col lg:w-11/12 items-center text-white justify-around max-w-maxContent">
+			<section className="flex mx-auto flex-col w-11/12 items-center text-richblack-5 justify-around max-w-maxContent">
 				{/* Founding Story */}
-				<div className="flex py-20 gap-x-24">
+				<div className="flex flex-col items-center gap-10 lg:flex-row justify-between my-20">
 					{/* Left Part */}
-					<div className="flex-1 flex flex-col gap-y-6">
-						<h2 className="font-semibold text-[36px] leading-[44px] font-inter">
+					<div className="flex flex-col lg:w-[50%] gap-y-6">
+						<h2 className="font-semibold text-4xl font-inter">
 							<HighlightText
 								text={"Our Founding Story"}
 								gradient={
@@ -95,7 +95,7 @@ const About = () => {
 							/>
 						</h2>
 
-						<div className="flex flex-col gap-y-4">
+						<div className="flex flex-col gap-y-4 lg:w-[95%]">
 							<p className="text-base font-medium text-richblack-300">
 								Our e-learning platform was born out of a shared
 								vision and passion for transforming education.
@@ -121,15 +121,19 @@ const About = () => {
 					</div>
 
 					{/* Right Part */}
-					<div className="flex-1">
-						<img src={FoundingStory} alt="Founding Story Image" />
+					<div>
+						<img
+							src={FoundingStory}
+							alt="Founding Story Image"
+							className="shadow-[0_0_20px_0] shadow-[#FC6767]"
+						/>
 					</div>
 				</div>
 
 				{/* Vision and Mission */}
-				<div className="flex py-20 gap-x-24">
+				<div className="flex flex-col items-center justify-between gap-10 lg:flex-row lg:py-20 pb-20">
 					{/* left box */}
-					<div className="flex flex-col gap-y-6">
+					<div className="flex flex-col gap-y-6 lg:w-[45%]">
 						<h1 className="text-[36px] font-semibold leading-[44px] font-inter">
 							<HighlightText
 								text={"Our Vision"}
@@ -138,7 +142,7 @@ const About = () => {
 								}
 							/>
 						</h1>
-						<p className="text-base font-medium text-richblack-300">
+						<p className="text-base font-medium text-richblack-300 lg:[95%]">
 							With this vision in mind, we set out on a journey to
 							create an e-learning platform that would
 							revolutionize the way people learn. Our team of
@@ -151,8 +155,8 @@ const About = () => {
 					</div>
 
 					{/* right box */}
-					<div className="flex flex-col gap-y-6">
-						<h1 className="text-[36px] font-semibold leading-[44px] font-inter">
+					<div className="flex flex-col gap-y-6 lg:w-[45%]">
+						<h1 className="text-4xl font-semibold font-inter">
 							<HighlightText
 								text={"Our Mission"}
 								gradient={
@@ -160,7 +164,7 @@ const About = () => {
 								}
 							/>
 						</h1>
-						<p className="text-base font-medium text-richblack-300">
+						<p className="text-base font-medium text-richblack-300 lg:w-[95%]">
 							Our mission goes beyond just delivering courses
 							online. We wanted to create a vibrant community of
 							learners, where individuals can connect,
@@ -180,30 +184,31 @@ const About = () => {
 			</section>
 
 			{/* Section 5 */}
-			<section className="max-w-maxContent lg:w-11/12 mx-auto items-center justify-center text-richblack-5 pt-20">
+			<section className="max-w-maxContent w-11/12 mx-auto items-center justify-center text-richblack-5 pt-20">
 				{/* Learning Grid */}
 				<LearningGrid />
 
 				{/* Contact Us Form */}
-				<div className="w-[50%] mx-auto">
-					<h2 className="text-[36px] font-semibold leading-[44px] text-center">
-						Get in Touch
-					</h2>
-					<p className="text-base font-medium text-richblack-300 text-center">
-						We’d love to here for you, Please fill out this form.
-					</p>
+				<div className="lg:w-[50%] md:w-[75%] mx-auto flex flex-col gap-10">
+					<div>
+						<h2 className="text-[36px] font-semibold leading-[44px] text-center">
+							Get in Touch
+						</h2>
+						<p className="text-base font-medium text-richblack-300 text-center">
+							We’d love to here for you, Please fill out this
+							form.
+						</p>
+					</div>
 					<ContactUsForm />
 				</div>
 			</section>
 
 			{/* Section 6 */}
-			<section className="max-w-maxContent lg:w-11/12 mx-auto items-center justify-center text-richblack-5 py-20">
-				<div className="flex flex-col text-center">
-					<h2 className="font-semibold text-[36px] leading-[44px] font-inter">
-						Reviews From other learners
-					</h2>
-					{/* <ReviewSlider /> */}
-				</div>
+			<section className="flex flex-col gap-8 max-w-maxContent relative w-11/12 mx-auto items-center justify-between text-richblack-5 py-20">
+				<h2 className="font-semibold text-4xl font-inter">
+					Reviews From other learners
+				</h2>
+				{/* <ReviewSlider /> */}
 			</section>
 
 			<Footer />

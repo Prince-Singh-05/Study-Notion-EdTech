@@ -7,7 +7,7 @@ import Footer from "../components/common/Footer";
 
 const ContactUs = () => {
 	return (
-		<div>
+		<div className="mt-14">
 			{/* Section 1 */}
 			<section className="flex relative mx-auto lg:w-11/12 text-white justify-around max-w-maxContent py-24 gap-x-12">
 				{/* Left Part */}
