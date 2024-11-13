@@ -3,3 +3,9 @@ export const ACCOUNT_TYPE = {
 	INSTRUCTOR: "instructor",
 	ADMIN: "admin",
 };
+
+export const ENROLLED_COURSE_TYPE = {
+	ALL: "all",
+	PENDING: "pending",
+	COMPLETED: "completed",
+};
