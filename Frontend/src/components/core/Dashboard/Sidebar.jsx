@@ -18,9 +18,9 @@ const Sidebar = () => {
 	const [confirmationModal, setConfirmationModal] = useState(null);
 
 	return (
-		<div className="text-richblack-5 w-56">
+		<div className="hidden lg:block text-richblack-5 lg:w-56 w-4 lg:fixed lg:left-0 lg:bottom-0 mt-14 transition-all duration-200">
 			{profileLoading || authLoading ? (
-				<div className="spinner">Loading...</div>
+				<div className="spinner"></div>
 			) : (
 				<div className="flex min-w-[14rem] flex-col border-r border-richblack-700 h-[calc(100vh-3.5rem)] bg-richblack-800 py-8 gap-y-2">
 					<div className="flex flex-col">
