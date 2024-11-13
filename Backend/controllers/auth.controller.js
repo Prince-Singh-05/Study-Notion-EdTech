@@ -246,7 +246,7 @@ const changePassword = async (req, res) => {
 	try {
 		// get data from request's body
 		const { oldPassword, newPassword, confirmNewPassword } = req.body;
-		const { email } = req.cookies.token; // ensure there is no error in this line
+		const { email } = req.user; // ensure there is no error in this line
 
 		// perform validation on password, check if password is correct
 		const user = await User.findOne({ email });
@@ -286,10 +286,8 @@ const changePassword = async (req, res) => {
 		// send mail for password change to user's email
 		const emailResponse = await sendMAIL(
 			updatedUser.email,
-			passwordUpdated(
-				updatedUser.email,
-				`Password updated successfully for ${updatedUser.firstName} ${updatedUser.lastName}`
-			)
+			`Password updated successfully`,
+			passwordUpdated(updatedUser.email, `${updatedUser.firstName}`)
 		);
 
 		if (!emailResponse) {

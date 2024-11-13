@@ -89,8 +89,7 @@ const Template = ({
 						width={558}
 						height={504}
 						loading="lazy"
-						className="absolute object-cover w-[100%] h-[100%] -top-[16px] right-[16px] z-10"
-						// there is problem with image size
+						className="absolute object-cover w-[100%] h-[100%] -top-[16px] right-[16px]"
 					/>
 				) : (
 					<img
@@ -99,7 +98,7 @@ const Template = ({
 						width={558}
 						height={504}
 						loading="lazy"
-						className="absolute object-cover w-[100%] h-[100%] -top-[16px] right-[16px] z-10"
+						className="absolute object-cover w-[100%] h-[100%] -top-[16px] right-[16px]"
 					/>
 				)}
 				<img
