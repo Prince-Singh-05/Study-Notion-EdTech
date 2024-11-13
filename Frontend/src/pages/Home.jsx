@@ -15,7 +15,7 @@ const Home = () => {
 	return (
 		<div>
 			{/* Section 1 */}
-			<section className="flex relative mx-auto flex-col lg:w-11/12 items-center text-richblack-5 justify-center max-w-maxContent">
+			<section className="flex relative mx-auto flex-col w-11/12 items-center text-richblack-5 justify-center max-w-maxContent mt-14">
 				{/* Top Section */}
 				<div className="flex flex-col items-center">
 					<Link to={"/signup"}>
@@ -61,7 +61,7 @@ const Home = () => {
 				{/* code section 1 */}
 				<div>
 					<CodeBlocks
-						position={`lg:flex-row`}
+						position={`md:flex-row flex-col`}
 						heading={
 							<div>
 								Unlock your{" "}
@@ -95,7 +95,7 @@ const Home = () => {
 				{/* code section 2 */}
 				<div>
 					<CodeBlocks
-						position={`lg:flex-row-reverse`}
+						position={`md:flex-row-reverse flex-col`}
 						heading={
 							<div>
 								Start{" "}
