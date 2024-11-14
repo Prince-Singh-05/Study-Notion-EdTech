@@ -124,5 +124,5 @@ body {
 	@apply text-sm text-richblack-5;
 }
 .form-style {
-	@apply rounded-lg bg-richblack-800 p-3 text-base text-richblack-5 shadow-[0_1px_0px_0_rgba(255,255,255,0.18)] placeholder:text-richblack-400 focus:outline-none;
+	@apply rounded-lg bg-richblack-800 p-3 text-base text-richblack-5 shadow-[inset_0_-1px_0px_0_rgba(255,255,255,0.18)] placeholder:text-richblack-400 focus:outline-none;
 }

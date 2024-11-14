@@ -10,7 +10,7 @@ const Settings = () => {
 				Edit Profile
 			</h1>
 
-			<div className="w-[70%] flex flex-col gap-y-4 pl-32">
+			<div className="lg:w-[75%] flex flex-col gap-y-4 lg:pl-32">
 				<ChangeProfilePicture />
 				<EditProfile />
 				<UpdatePassword />

@@ -35,22 +35,26 @@ const UpdatePassword = () => {
 				<h2 className="text-lg font-semibold text-richblack-5">
 					Password
 				</h2>
-				<div className="flex flex-col justify-between flex-wrap gap-5 lg:flex-row">
-					<div className="relative flex flex-col gap-2 flex-1">
-						<label htmlFor="oldPassword" className="lable-style">
-							Current Password
-						</label>
+				<div className="flex flex-col flex-wrap gap-5 lg:flex-row">
+					<label className="relative flex-grow">
+						<p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+							Current Password{" "}
+							<sup className="text-pink-200">*</sup>
+						</p>
 						<input
 							type={showOldPassword ? "text" : "password"}
 							name="oldPassword"
-							id="oldPassword"
 							placeholder="Enter Current Password"
-							className="form-style"
+							style={{
+								boxShadow:
+									"inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+							}}
+							className="w-full rounded-[0.5rem] bg-richblack-800 p-3 text-richblack-5"
 							{...register("oldPassword", { required: true })}
 						/>
 						<span
 							onClick={() => setShowOldPassword((prev) => !prev)}
-							className="absolute right-3 top-[38px] cursor-pointer"
+							className="absolute right-3 top-[38px] z-10 cursor-pointer"
 						>
 							{showOldPassword ? (
 								<AiOutlineEyeInvisible
@@ -61,28 +65,26 @@ const UpdatePassword = () => {
 								<AiOutlineEye fontSize={24} fill="#AFB2BF" />
 							)}
 						</span>
-						{errors.oldPassword && (
-							<span className="-mt-1 text-[12px] text-yellow-100">
-								Please enter your Current Password.
-							</span>
-						)}
-					</div>
+					</label>
 
-					<div className="relative flex flex-col gap-2 flex-1">
-						<label htmlFor="newPassword" className="lable-style">
-							New Password
-						</label>
+					<label className="relative flex-grow">
+						<p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+							New Password <sup className="text-pink-200">*</sup>
+						</p>
 						<input
 							type={showNewPassword ? "text" : "password"}
 							name="newPassword"
-							id="newPassword"
 							placeholder="Enter New Password"
-							className="form-style"
+							style={{
+								boxShadow:
+									"inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+							}}
+							className="w-full rounded-[0.5rem] bg-richblack-800 p-3 text-richblack-5"
 							{...register("newPassword", { required: true })}
 						/>
 						<span
 							onClick={() => setShowNewPassword((prev) => !prev)}
-							className="absolute right-3 top-[38px] cursor-pointer"
+							className="absolute right-3 top-[38px] z-10 cursor-pointer"
 						>
 							{showNewPassword ? (
 								<AiOutlineEyeInvisible
@@ -93,26 +95,22 @@ const UpdatePassword = () => {
 								<AiOutlineEye fontSize={24} fill="#AFB2BF" />
 							)}
 						</span>
-						{errors.newPassword && (
-							<span className="-mt-1 text-[12px] text-yellow-100">
-								Please enter your New Password.
-							</span>
-						)}
-					</div>
+					</label>
 
-					<div className="relative flex flex-col gap-2 flex-1">
-						<label
-							htmlFor="confirmNewPassword"
-							className="lable-style"
-						>
-							Confirm New Password
-						</label>
+					<label className="relative flex-grow">
+						<p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+							Confirm New Password{" "}
+							<sup className="text-pink-200">*</sup>
+						</p>
 						<input
 							type={showConfirmNewPassword ? "text" : "password"}
 							name="confirmNewPassword"
-							id="confirmNewPassword"
 							placeholder="Confirm New Password"
-							className="form-style"
+							style={{
+								boxShadow:
+									"inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+							}}
+							className="w-full rounded-[0.5rem] bg-richblack-800 p-3 text-richblack-5"
 							{...register("confirmNewPassword", {
 								required: true,
 							})}
@@ -121,7 +119,7 @@ const UpdatePassword = () => {
 							onClick={() =>
 								setShowConfirmNewPassword((prev) => !prev)
 							}
-							className="absolute right-3 top-[38px] cursor-pointer"
+							className="absolute right-3 top-[38px] z-10 cursor-pointer"
 						>
 							{showConfirmNewPassword ? (
 								<AiOutlineEyeInvisible
@@ -132,12 +130,7 @@ const UpdatePassword = () => {
 								<AiOutlineEye fontSize={24} fill="#AFB2BF" />
 							)}
 						</span>
-						{errors.confirmNewPassword && (
-							<span className="-mt-1 text-[12px] text-yellow-100">
-								Please confirm your New Password.
-							</span>
-						)}
-					</div>
+					</label>
 				</div>
 			</div>
 

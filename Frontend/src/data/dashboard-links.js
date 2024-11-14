@@ -44,7 +44,7 @@ export const sidebarLinks = [
 	{
 		id: 7,
 		name: "Wishlist",
-		path: "/dashboard/wishlist",
+		path: "/dashboard/cart",
 		icon: "VscBookmark",
 	},
 ];

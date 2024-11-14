@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import Settings from "./components/core/Dashboard/Settings";
+import Cart from "./components/core/Dashboard/Cart";
 
 function App() {
 	return (
@@ -50,6 +51,7 @@ function App() {
 						element={<EnrolledCourses />}
 					/>
 					<Route path="/dashboard/settings" element={<Settings />} />
+					<Route path="/dashboard/cart" element={<Cart />} />
 
 					<Route path="/dashboard/*" element={<NotFound />} />
 				</Route>
