@@ -9,6 +9,7 @@ import userRouter from "./routes/user.routes.js";
 import profileRouter from "./routes/profile.routes.js";
 import paymentRouter from "./routes/payment.routes.js";
 import courseRouter from "./routes/course.routes.js";
+import { contactUsRouter } from "./routes/contact.routes.js";
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -34,6 +35,7 @@ app.use("/api/v1/auth", userRouter);
 app.use("/api/v1/profile", profileRouter);
 app.use("/api/v1/course", courseRouter);
 app.use("/api/v1/paymnet", paymentRouter);
+app.use("/api/v1/reach", contactUsRouter);
 
 // default route
 app.get("/", (req, res) => {

@@ -26,4 +26,18 @@ export const settingEndpoints = {
 // Categories API
 export const categories = {
 	CATEGORIES_API: BASE_URL + "/course/getAllCategories",
+	CREATE_CATEGORY_API: BASE_URL + "/course/createCategory",
+	GET_CATEGORY_PAGE_DETAILS_API: BASE_URL + "/course/getCategoryPageDetails",
+};
+
+// Ratings and Reviews
+export const reviewEndpoints = {
+	CREATE_REVIEW_API: BASE_URL + "/course/createReview",
+	GET_AVG_RATING_API: BASE_URL + "/course/getAverageRating",
+	ALL_REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
+	COURSE_REVIEWS_DETAILS_API: BASE_URL + "/course/getReviewsForCourse",
+};
+
+export const contactusEndpoints = {
+	CONTACT_US_API: BASE_URL + "/reach/contact",
 };
