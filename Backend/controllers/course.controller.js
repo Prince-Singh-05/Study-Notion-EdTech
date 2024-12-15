@@ -93,11 +93,15 @@ const createCourse = async (req, res) => {
 
 		// add course in Category model
 
-		await Category.findByIdAndUpdate(categoryId, {
-			$push: {
-				courses: newCourse._id,
+		await Category.findByIdAndUpdate(
+			categoryId,
+			{
+				$push: {
+					courses: newCourse._id,
+				},
 			},
-		});
+			{ new: true }
+		);
 
 		// return response
 		return res.status(200).json({

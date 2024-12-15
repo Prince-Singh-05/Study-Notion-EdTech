@@ -20,11 +20,15 @@ const createSection = async (req, res) => {
 		});
 
 		// add this section to course model
-		await Course.findByIdAndUpdate(courseId, {
-			$push: {
-				courseContent: newSection._id,
+		await Course.findByIdAndUpdate(
+			courseId,
+			{
+				$push: {
+					courseContent: newSection._id,
+				},
 			},
-		});
+			{ new: true }
+		);
 
 		// return response
 		return res.status(200).json({
@@ -94,7 +98,11 @@ const updateSection = async (req, res) => {
 		}
 
 		// update the entry in DB
-		await Section.findByIdAndUpdate(sectionId, { sectionName });
+		await Section.findByIdAndUpdate(
+			sectionId,
+			{ sectionName },
+			{ new: true }
+		);
 
 		// return response
 		return res.status(200).json({
@@ -130,11 +138,15 @@ const deleteSection = async (req, res) => {
 			await SubSection.findByIdAndDelete(subSection);
 		});
 
-		await Course.findByIdAndUpdate(courseId, {
-			$pull: {
-				courseContent: section._id,
+		await Course.findByIdAndUpdate(
+			courseId,
+			{
+				$pull: {
+					courseContent: section._id,
+				},
 			},
-		});
+			{ new: true }
+		);
 
 		return res.status(200).json({
 			success: true,

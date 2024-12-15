@@ -54,7 +54,7 @@ const sendOTP = async (req, res) => {
 		}
 
 		// store this OTP in DB
-		await OTP.findOneAndUpdate({ email }, { otp });
+		await OTP.findOneAndUpdate({ email }, { otp }, { new: true });
 
 		// return response
 		return res.status(200).json({

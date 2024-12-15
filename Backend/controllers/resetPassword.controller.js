@@ -39,7 +39,8 @@ const resetPasswordToken = async (req, res) => {
 			{
 				token,
 				resetPasswordExpiry: Date.now() + 5 * 60 * 1000,
-			}
+			},
+			{ new: true }
 		);
 
 		// return response
@@ -93,7 +94,11 @@ const resetPassword = async (req, res) => {
 		const hashedPassword = await bcrypt.hash(password, 8);
 
 		// update the password in DB
-		await User.findOneAndUpdate({ token }, { password: hashedPassword });
+		await User.findOneAndUpdate(
+			{ token },
+			{ password: hashedPassword },
+			{ new: true }
+		);
 
 		// return response
 		return res.status(200).json({

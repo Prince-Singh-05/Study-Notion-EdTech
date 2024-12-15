@@ -55,11 +55,15 @@ const createReview = async (req, res) => {
 		});
 
 		// update course with rating/review
-		await Course.findByIdAndUpdate(courseId, {
-			$push: {
-				ratingAndReview: newRatingAndReview._id,
+		await Course.findByIdAndUpdate(
+			courseId,
+			{
+				$push: {
+					ratingAndReview: newRatingAndReview._id,
+				},
 			},
-		});
+			{ new: true }
+		);
 
 		// return response
 		return res.status(200).json({

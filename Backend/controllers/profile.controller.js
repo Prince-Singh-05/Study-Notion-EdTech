@@ -25,12 +25,18 @@ const updateProfile = async (req, res) => {
 
 		const profileId = user.additionalDetails;
 
-		await Profile.findByIdAndUpdate(profileId, {
-			gender,
-			dateOfBirth,
-			about,
-			contactNumber,
-		});
+		await Profile.findByIdAndUpdate(
+			profileId,
+			{
+				gender,
+				dateOfBirth,
+				about,
+				contactNumber,
+			},
+			{ new: true }
+		);
+
+		await user.save();
 
 		// return response
 		return res.status(200).json({

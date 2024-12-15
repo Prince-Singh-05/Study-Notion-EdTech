@@ -44,11 +44,15 @@ const createSubSection = async (req, res) => {
 		});
 
 		// insert this subsection id in section model
-		await Section.findByIdAndUpdate(sectionId, {
-			$push: {
-				subSections: newSubSection._id,
+		await Section.findByIdAndUpdate(
+			sectionId,
+			{
+				$push: {
+					subSections: newSubSection._id,
+				},
 			},
-		});
+			{ new: true }
+		);
 
 		// return response
 		return res.status(200).json({
@@ -91,12 +95,16 @@ const updateSubSection = async (req, res) => {
 		);
 
 		// update entry in DB
-		await SubSection.findByIdAndUpdate(subSectionId, {
-			title,
-			timeDuration,
-			description,
-			videoURL: uploadedLecture.secure_url,
-		});
+		await SubSection.findByIdAndUpdate(
+			subSectionId,
+			{
+				title,
+				timeDuration,
+				description,
+				videoURL: uploadedLecture.secure_url,
+			},
+			{ new: true }
+		);
 
 		// return response
 		return res.status(200).json({
@@ -126,11 +134,15 @@ const deleteSubSection = async (req, res) => {
 		}
 
 		// pull subSectionId from Section model
-		await Section.findByIdAndUpdate(sectionId, {
-			$pull: {
-				subSections: subSectionId,
+		await Section.findByIdAndUpdate(
+			sectionId,
+			{
+				$pull: {
+					subSections: subSectionId,
+				},
 			},
-		});
+			{ new: true }
+		);
 
 		// delete subSection from DB
 		await SubSection.findByIdAndDelete(subSectionId);

@@ -1,7 +1,7 @@
 import sendMAIL from "../utils/nodemailer.js";
 import { contactUsEmail } from "../mail/templates/contactFormEmail.js";
 
-exports.contactUsController = async () => {
+const contactUsController = async () => {
 	try {
 		const { email, firstName, lastName, message, phoneNo, countrycode } =
 			req.body;
@@ -32,3 +32,5 @@ exports.contactUsController = async () => {
 		});
 	}
 };
+
+export { contactUsController };
