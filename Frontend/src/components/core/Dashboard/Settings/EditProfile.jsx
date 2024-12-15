@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { updateProfile } from "../../../../services/operations/settingsAPI.js";
 import IconButton from "../../../common/IconButton.jsx";
 
-const genders = ["Male", "Female", "Prefer not to say"];
+const genders = ["male", "female", "prefer not to say"];
 
 const EditProfile = () => {
 	const { user } = useSelector((state) => state.profile);
@@ -107,13 +107,16 @@ const EditProfile = () => {
 						<select
 							name="gender"
 							id="gender"
-							className="form-style"
+							className="form-style capitalize flex-1"
 							{...register("gender")}
 							defaultValue={user?.additionalDetails?.gender}
 						>
 							{genders.map((ele, i) => {
 								return (
-									<option key={i} value={ele}>
+									<option
+										key={i}
+										value={ele}
+									>
 										{ele}
 									</option>
 								);

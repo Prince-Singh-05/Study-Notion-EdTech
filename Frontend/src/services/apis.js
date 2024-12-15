@@ -41,3 +41,15 @@ export const reviewEndpoints = {
 export const contactusEndpoints = {
 	CONTACT_US_API: BASE_URL + "/reach/contact",
 };
+
+export const courseEndpoints = {
+	CREATE_COURSE_API: BASE_URL + "/course/createCourse",
+	ADD_SECTION_API: BASE_URL + "/course/addSection",
+	UPDATE_SECTION_API: BASE_URL + "/course/updateSection",
+	DELETE_SECTION_API: BASE_URL + "/course/deleteSection",
+	ADD_SUB_SECTION_API: BASE_URL + "/course/addSubSection",
+	UPDATE_SUB_SECTION_API: BASE_URL + "/course/updateSubSection",
+	DELETE_SUB_SECTION_API: BASE_URL + "/course/deleteSubSection",
+	GET_ALL_COURSES_API: BASE_URL + "/course/getAllCourses",
+	GET_COURSE_DETAILS_API: BASE_URL + "/course/getCourseDetails",
+};
