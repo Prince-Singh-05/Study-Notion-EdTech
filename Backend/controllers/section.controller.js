@@ -20,7 +20,7 @@ const createSection = async (req, res) => {
 		});
 
 		// add this section to course model
-		await Course.findByIdAndUpdate(
+		const updatedCourse = await Course.findByIdAndUpdate(
 			courseId,
 			{
 				$push: {
@@ -28,11 +28,17 @@ const createSection = async (req, res) => {
 				},
 			},
 			{ new: true }
-		);
+		).populate({
+			path: "courseContent",
+			populate: {
+				path: "subSections",
+			},
+		});
 
 		// return response
 		return res.status(200).json({
 			success: true,
+			data: updatedCourse,
 			message: "Section created successfully",
 		});
 	} catch (error) {
@@ -88,9 +94,9 @@ const getAllSectionsForACourse = async (req, res) => {
 const updateSection = async (req, res) => {
 	try {
 		// get data from req.body
-		const { sectionId, sectionName } = req.body;
+		const { sectionId, sectionName, courseId } = req.body;
 		// validate data
-		if (!sectionId || !sectionName) {
+		if (!sectionId || !sectionName || !courseId) {
 			return res.status(400).json({
 				success: false,
 				message: "All fields are reuired",
@@ -104,10 +110,20 @@ const updateSection = async (req, res) => {
 			{ new: true }
 		);
 
+		const updatedCourse = await Course.findById(courseId)
+			.populate({
+				path: "courseContent",
+				populate: {
+					path: "subSections",
+				},
+			})
+			.exec();
+
 		// return response
 		return res.status(200).json({
 			success: true,
 			message: "Section updated successfully",
+			data: updatedCourse,
 		});
 	} catch (error) {
 		console.error(error.message);
@@ -132,13 +148,9 @@ const deleteSection = async (req, res) => {
 
 		const section = await Section.findByIdAndDelete(sectionId);
 
-		const subSections = section.subSections;
+		await SubSection.deleteMany({ _id: { $in: section.subSections } });
 
-		subSections.map(async (subSection) => {
-			await SubSection.findByIdAndDelete(subSection);
-		});
-
-		await Course.findByIdAndUpdate(
+		const updatedCourse = await Course.findByIdAndUpdate(
 			courseId,
 			{
 				$pull: {
@@ -146,11 +158,19 @@ const deleteSection = async (req, res) => {
 				},
 			},
 			{ new: true }
-		);
+		)
+			.populate({
+				path: "courseContent",
+				populate: {
+					path: "subSections",
+				},
+			})
+			.exec();
 
 		return res.status(200).json({
 			success: true,
 			message: "Section deleted successfully",
+			data: updatedCourse,
 		});
 	} catch (error) {
 		console.error(error.message);

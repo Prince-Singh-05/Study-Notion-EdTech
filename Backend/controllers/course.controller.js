@@ -20,6 +20,9 @@ const createCourse = async (req, res) => {
 
 		const thumbnail = req.files.thumbnail;
 
+		// console.log("req body", req.body)
+		// console.log("thumbnail", thumbnail)
+
 		// validate data and file
 		if (
 			!courseName ||

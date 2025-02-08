@@ -1,11 +1,13 @@
 import SubSection from "../models/subSection.model.js";
 import Section from "../models/section.model.js";
 import uploadFileOnCloudinary from "../utils/cloudinary.js";
+import Course from "../models/course.model.js";
 
 const createSubSection = async (req, res) => {
 	try {
 		// get data from req body, get videoFile from req.files
-		const { title, description, timeDuration, sectionId } = req.body;
+		const { title, description, timeDuration, sectionId, courseId } =
+			req.body;
 		const videoLecture = req.files.videoFile;
 
 		// data/file validation
@@ -14,7 +16,8 @@ const createSubSection = async (req, res) => {
 			!title ||
 			!description ||
 			!timeDuration ||
-			!videoLecture
+			!videoLecture ||
+			!courseId
 		) {
 			return res.status(400).json({
 				success: false,
@@ -54,10 +57,20 @@ const createSubSection = async (req, res) => {
 			{ new: true }
 		);
 
+		const updatedCourse = await Course.findById(courseId)
+			.populate({
+				path: "courseContent",
+				populate: {
+					path: "subSections",
+				},
+			})
+			.exec();
+
 		// return response
 		return res.status(200).json({
 			success: true,
 			message: "Sub Section created successfully",
+			data: updatedCourse,
 		});
 	} catch (error) {
 		console.error(error.message);
