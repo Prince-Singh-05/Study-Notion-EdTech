@@ -13,7 +13,10 @@ import {
 // Course Controllers Import
 import {
 	createCourse,
+	deleteCourse,
+	editCourse,
 	getAllCourses,
+	getAllInstructorCourses,
 	getCourseDetails,
 } from "../controllers/course.controller.js";
 
@@ -57,8 +60,17 @@ courseRouter.post("/deleteSection", auth, isInstructor, deleteSection);
 courseRouter.post("/addSubSection", auth, isInstructor, createSubSection);
 courseRouter.post("/updateSubSection", auth, isInstructor, updateSubSection);
 courseRouter.post("/deleteSubSection", auth, isInstructor, deleteSubSection);
-courseRouter.get("/getAllCourses", getAllCourses);
+courseRouter.get(
+	"/getAllInstructorCourses",
+	auth,
+	isInstructor,
+	getAllInstructorCourses
+);
+courseRouter.delete("/deleteCourse", auth, isInstructor, deleteCourse);
+courseRouter.post("/editCourse", auth, isInstructor, editCourse);
+
 courseRouter.get("/getCourseDetails", getCourseDetails);
+courseRouter.get("/getAllCourses", getAllCourses);
 
 // Category Routes (Only by Admins)
 
