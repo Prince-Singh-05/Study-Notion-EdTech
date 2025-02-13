@@ -69,7 +69,7 @@ courseRouter.get(
 courseRouter.delete("/deleteCourse", auth, isInstructor, deleteCourse);
 courseRouter.post("/editCourse", auth, isInstructor, editCourse);
 
-courseRouter.get("/getCourseDetails", getCourseDetails);
+courseRouter.post("/getCourseDetails", getCourseDetails);
 courseRouter.get("/getAllCourses", getAllCourses);
 
 // Category Routes (Only by Admins)
