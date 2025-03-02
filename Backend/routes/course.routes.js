@@ -46,7 +46,6 @@ import {
 	createReview,
 	getAllReviews,
 	getAllReviewsForCourse,
-	getAverageRating,
 } from "../controllers/ratingAndReview.controller.js";
 
 const courseRouter = Router();
@@ -76,13 +75,12 @@ courseRouter.get("/getAllCourses", getAllCourses);
 
 courseRouter.post("/createCategory", auth, isAdmin, createCategory);
 courseRouter.get("/getAllCategories", getAllCategories);
-courseRouter.get("/getCategoryPageDetails", getCategoryPageDetails);
+courseRouter.post("/getCategoryPageDetails", getCategoryPageDetails);
 
 // Rating and Review Routes
 
 courseRouter.post("/createReview", auth, isStudent, createReview);
-courseRouter.get("/getAverageRating", getAverageRating);
 courseRouter.get("/getReviews", getAllReviews);
-courseRouter.get("/getReviewsForCourse", getAllReviewsForCourse);
+courseRouter.get("/getReviewsForCourse/:courseId", getAllReviewsForCourse);
 
 export default courseRouter;
