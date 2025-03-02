@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TiDelete } from "react-icons/ti";
+import { useSelector } from "react-redux";
 
 const ChipInput = ({
 	label,
@@ -13,7 +14,13 @@ const ChipInput = ({
 	const [tagList, setTagList] = useState([]);
 	const [tag, setTag] = useState("");
 
+	const { editCourse, course } = useSelector((state) => state.course);
+
 	useEffect(() => {
+		if (editCourse) {
+			setTagList(JSON.parse(course?.tags));
+		}
+
 		register(name, {
 			required: true,
 			// validate: (value) => value.length > 0,
@@ -24,22 +31,17 @@ const ChipInput = ({
 		setValue(name, tagList);
 	}, [tagList]);
 
-	const tagInput = document.getElementById(name);
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter" || e.key === ",") {
+			e.preventDefault();
 
-	const handleChange = (e) => {
-		setTag(e.target.value);
-		if (tag.length === 0) return;
-		tagInput.addEventListener("keyup", (key) => {
-			if (key.key === "Enter") {
+			setTag(e.target.value.trim());
+
+			if (tag && !tagList.includes(tag)) {
 				setTagList([...tagList, tag]);
-				setTag("");
+				e.target.value = "";
 			}
-			if (key.key === ",") {
-				setTagList([...tagList, tag]);
-				setTag("");
-			}
-			setValue(name, tagList);
-		});
+		}
 	};
 
 	// console.log("current Values", getValues());
@@ -74,10 +76,10 @@ const ChipInput = ({
 			<input
 				name={name}
 				id={name}
+				type="text"
 				placeholder={placeholder}
-				value={tag}
 				className="form-style"
-				onChange={handleChange}
+				onKeyDown={handleKeyDown}
 			/>
 			{errors[name] && <span>{label} is required</span>}
 		</div>

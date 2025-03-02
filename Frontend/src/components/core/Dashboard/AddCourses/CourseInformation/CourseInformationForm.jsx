@@ -48,10 +48,10 @@ const CourseInformationForm = () => {
 			setValue("courseDescription", course.courseDescription);
 			setValue("coursePrice", course.price);
 			setValue("courseCategory", course.category);
-			setValue("courseTags", course.tags);
+			setValue("courseTags", JSON.parse(course.tags));
 			setValue("courseThumbnail", course.thumbnail);
 			setValue("courseBenefits", course.whatYouWillLearn);
-			setValue("courseRequirements", course.instructions);
+			setValue("courseRequirements", JSON.parse(course.instructions));
 		}
 
 		getCategories();
@@ -270,6 +270,7 @@ const CourseInformationForm = () => {
 				label="Course Thumbnail"
 				register={register}
 				setValue={setValue}
+				getValues={getValues}
 				errors={errors}
 			/>
 
@@ -304,7 +305,7 @@ const CourseInformationForm = () => {
 				{editCourse && (
 					<button
 						onClick={() => dispatch(setStep(2))}
-						className="flex items-center gap-2 bg-richblack-300"
+						className="flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer bg-richblack-300"
 					>
 						Continue Without Saving
 					</button>

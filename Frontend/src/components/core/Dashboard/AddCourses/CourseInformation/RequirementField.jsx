@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const RequirementField = ({
 	name,
@@ -11,8 +11,13 @@ const RequirementField = ({
 }) => {
 	const [requirement, setRequirement] = useState("");
 	const [requirementList, setRequirementList] = useState([]);
+	const { editCourse, course } = useSelector((state) => state.course);
 
 	useEffect(() => {
+		if (editCourse) {
+			setRequirementList(JSON.parse(course?.instructions));
+		}
+
 		register(name, {
 			required: true,
 			validate: (value) => value.length > 0,
