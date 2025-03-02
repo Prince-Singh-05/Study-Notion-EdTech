@@ -1,6 +1,5 @@
 import RatingAndReview from "../models/ratingAndReview.model.js";
 import Course from "../models/course.model.js";
-import mongoose from "mongoose";
 
 // create Rating/Review
 const createReview = async (req, res) => {
@@ -80,53 +79,6 @@ const createReview = async (req, res) => {
 	}
 };
 
-// getAverageRating
-const getAverageRating = async (req, res) => {
-	try {
-		// get courseId from req body, validation
-		const { courseId } = req.body;
-
-		if (!courseId) {
-			return res.status(400).json({
-				success: false,
-				message: "Course id is required to get average rating",
-			});
-		}
-
-		// find all reviews for the course and aggregate the averageRating
-		const result = await RatingAndReview.aggregate([
-			{
-				$match: { course: new mongoose.Types.ObjectId(`${courseId}`) },
-			},
-			{
-				$group: { _id: null, averageRating: { $avg: "$rating" } },
-			},
-		]);
-
-		// check if there is some rating on this course
-		if (result.length > 0) {
-			return res.status(200).json({
-				success: true,
-				message: "average rating of the course fetched successfully",
-				averageRating: result[0].averageRating,
-			});
-		}
-		// return response
-
-		return res.status(200).json({
-			success: true,
-			message: "there is no review on this course yet",
-			averageRating: 0,
-		});
-	} catch (error) {
-		console.error(error.message);
-		return res.status(500).json({
-			success: false,
-			message: "error while fetching averageRating for a course",
-		});
-	}
-};
-
 // getAllReviews
 const getAllReviews = async (req, res) => {
 	try {
@@ -165,7 +117,7 @@ const getAllReviews = async (req, res) => {
 // getAllReviewsForCourse
 const getAllReviewsForCourse = async (req, res) => {
 	try {
-		const { courseId } = req.body;
+		const { courseId } = req.params;
 
 		if (!courseId) {
 			return res.status(400).json({
@@ -207,9 +159,4 @@ const getAllReviewsForCourse = async (req, res) => {
 	}
 };
 
-export {
-	createReview,
-	getAverageRating,
-	getAllReviews,
-	getAllReviewsForCourse,
-};
+export { createReview, getAllReviews, getAllReviewsForCourse };

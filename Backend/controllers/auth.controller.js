@@ -260,6 +260,10 @@ const changePassword = async (req, res) => {
 
 		const passwordMatch = await bcrypt.compare(oldPassword, user.password);
 
+		const userFormToken = await User.findById(req.user.id);
+
+		if(userFromToken.email === email)
+
 		if (!passwordMatch) {
 			return res.status(403).json({
 				success: false,

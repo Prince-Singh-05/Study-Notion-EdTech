@@ -5,6 +5,7 @@ import uploadFileOnCloudinary from "../utils/cloudinary.js";
 import {} from "dotenv/config";
 import Section from "../models/section.model.js";
 import SubSections from "../models/subSection.model.js";
+import CourseProgress from "../models/courseProgress.model.js";
 
 const createCourse = async (req, res) => {
 	try {
@@ -179,9 +180,6 @@ const getCourseDetails = async (req, res) => {
 			.populate("category")
 			.populate({
 				path: "studentsEnrolled",
-				populate: {
-					path: "addtionalDetails courses courseProgress",
-				},
 			})
 			.exec();
 

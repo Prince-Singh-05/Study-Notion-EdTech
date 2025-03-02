@@ -19,7 +19,7 @@ const auth = async (req, res, next) => {
 
 		// verify the token with secret
 		const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-
+		
 		if (!decodedToken) {
 			return res.status(401).json({
 				success: false,

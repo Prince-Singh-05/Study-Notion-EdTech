@@ -74,11 +74,27 @@ const getCategoryPageDetails = async (req, res) => {
 		const selectedCategory = await Category.findById(categoryId)
 			.populate({
 				path: "courses",
-				populate: {
-					path: "ratingAndReview studentsEnrolled",
-				},
+				populate: [
+					{
+						path: "ratingAndReview",
+					},
+					{
+						path: "studentsEnrolled",
+					},
+					{
+						path: "instructor",
+						select: "-password",
+					},
+					{
+						path: "courseContent",
+						populate: {
+							path: "subSections",
+						},
+					},
+				],
 			})
 			.exec();
+
 		const selectedCourses = selectedCategory.courses;
 
 		// check if there is some course present with slected category or not
@@ -120,9 +136,24 @@ const getCategoryPageDetails = async (req, res) => {
 		})
 			.populate({
 				path: "courses",
-				populate: {
-					path: "ratingAndReview studentsEnrolled",
-				},
+				populate: [
+					{
+						path: "ratingAndReview",
+					},
+					{
+						path: "studentsEnrolled",
+					},
+					{
+						path: "instructor",
+						select: "-password",
+					},
+					{
+						path: "courseContent",
+						populate: {
+							path: "subSections",
+						},
+					},
+				],
 			})
 			.exec();
 
@@ -149,7 +180,24 @@ const getCategoryPageDetails = async (req, res) => {
 
 		// get top-selling courses from all category
 
-		const allCourses = await Course.find();
+		const allCourses = await Course.find().populate([
+			{
+				path: "ratingAndReview",
+			},
+			{
+				path: "studentsEnrolled",
+			},
+			{
+				path: "instructor",
+				select: "-password",
+			},
+			{
+				path: "courseContent",
+				populate: {
+					path: "subSections",
+				},
+			},
+		]);
 
 		const topSellingCourses = allCourses
 			.sort(
@@ -161,15 +209,18 @@ const getCategoryPageDetails = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			message: "All category page details fetched successfully",
-			selectedCategoryData: {
-				most_popular: mostPopularCourses,
-				new_courses: newCourses,
-				trending_courses: trendingCourses,
-			},
-			otherCoursesData: {
-				top_five_courses_with_diffrent_categories:
-					diffrentCategoriesCourses,
-				top_selling_courses: topSellingCourses,
+			data: {
+				selectedCategoryData: {
+					most_popular: mostPopularCourses,
+					new_courses: newCourses,
+					trending_courses: trendingCourses,
+				},
+				otherCoursesData: {
+					top_five_courses_with_diffrent_categories:
+						diffrentCategoriesCourses,
+					top_selling_courses: topSellingCourses,
+				},
+				selectedCategory,
 			},
 		});
 	} catch (error) {
