@@ -21,9 +21,14 @@ import AddCourse from "./components/core/Dashboard/AddCourses";
 import { useSelector } from "react-redux";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import EditCourse from "./components/core/Dashboard/EditCourses";
+import Catalog from "./pages/Catalog";
+import Course from "./pages/Course";
 
 function App() {
 	const { user } = useSelector((state) => state.profile);
+	// const [count, setCount] = useState(1);
+
+	// setCount(1);
 
 	return (
 		<div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
@@ -40,6 +45,8 @@ function App() {
 				<Route path="/verify-email" element={<VerifyEmail />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/contact" element={<ContactUs />} />
+				<Route path="/catalog/:catalogName" element={<Catalog />} />
+				<Route path="/course/:courseId" element={<Course />} />
 
 				{/* Dashboard */}
 				<Route
@@ -71,7 +78,7 @@ function App() {
 								element={<MyCourses />}
 							/>
 							<Route
-								path="/dashboard/edit-course/:id"
+								path="/dashboard/edit-course/:courseId"
 								element={<EditCourse />}
 							/>
 						</>
