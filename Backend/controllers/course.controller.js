@@ -178,9 +178,6 @@ const getCourseDetails = async (req, res) => {
 				},
 			})
 			.populate("category")
-			.populate({
-				path: "studentsEnrolled",
-			})
 			.exec();
 
 		if (!courseDetails) {
