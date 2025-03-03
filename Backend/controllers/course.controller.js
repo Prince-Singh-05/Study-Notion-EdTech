@@ -6,6 +6,7 @@ import {} from "dotenv/config";
 import Section from "../models/section.model.js";
 import SubSections from "../models/subSection.model.js";
 import CourseProgress from "../models/courseProgress.model.js";
+import { convertSecondsToDuration } from "../utils/secToDuration.js";
 
 const createCourse = async (req, res) => {
 	try {
@@ -191,6 +192,72 @@ const getCourseDetails = async (req, res) => {
 			success: true,
 			message: "Course details fetched successfully",
 			data: courseDetails,
+		});
+	} catch (error) {
+		console.error(error.message);
+		return res.status(500).json({
+			success: false,
+			message: "Error while fetching course details",
+		});
+	}
+};
+
+const getFullCourseDetails = async (req, res) => {
+	try {
+		const { courseId } = req.body;
+		const userId = req.user.id;
+		const courseDetails = await Course.findById(courseId)
+			.populate({
+				path: "instructor",
+				select: "-password -token -resetPasswordExpiry",
+				populate: {
+					path: "additionalDetails",
+				},
+			})
+			.populate("category")
+			.populate("ratingAndReview")
+			.populate({
+				path: "courseContent",
+				populate: {
+					path: "subSections",
+				},
+			})
+			.exec();
+
+		let courseProgressCount = await CourseProgress.findOne({
+			courseId: courseId,
+			userId: userId,
+		});
+
+		console.log("COURSE PROGRESS COUNT", courseProgressCount);
+
+		if (!courseDetails) {
+			return res.status(400).json({
+				success: false,
+				message: `Course not found with this ${courseId}`,
+			});
+		}
+
+		let totalDurationInSeconds = 0;
+		courseDetails.courseContent.forEach((content) => {
+			content.subSections.forEach((subSection) => {
+				const timeDurationInSeconds = parseInt(subSection.timeDuration);
+				totalDurationInSeconds += timeDurationInSeconds;
+			});
+		});
+
+		const totalDuration = convertSecondsToDuration(totalDurationInSeconds);
+
+		return res.status(200).json({
+			success: true,
+			message: "Course details fetched successfully",
+			data: {
+				courseDetails,
+				totalDuration,
+				completedVideos: courseProgressCount?.completedVideos
+					? courseProgressCount?.completedVideos
+					: [],
+			},
 		});
 	} catch (error) {
 		console.error(error.message);
