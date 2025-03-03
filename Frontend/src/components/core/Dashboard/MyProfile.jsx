@@ -12,7 +12,7 @@ const MyProfile = () => {
 	return (
 		<div className="text-richblack-5 flex flex-col justify-center p-6 gap-y-6">
 			<h1 className="font-semibold text-3xl">My Profile</h1>
-			<div className="lg:w-[75%] flex flex-col gap-y-10 lg:pl-24 transition-all duration-1000">
+			<div className="xl:w-[75%] flex flex-col gap-y-10 xl:pl-24 transition-all duration-1000">
 				{/* Section 1 */}
 				<div className="flex bg-richblack-800 border border-richblack-700 justify-between p-6 items-center rounded-lg">
 					<div className="flex gap-x-4 items-center">
