@@ -440,6 +440,7 @@ export {
 	createCourse,
 	getAllCourses,
 	getCourseDetails,
+	getFullCourseDetails,
 	getAllInstructorCourses,
 	deleteCourse,
 	editCourse,

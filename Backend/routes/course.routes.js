@@ -18,6 +18,7 @@ import {
 	getAllCourses,
 	getAllInstructorCourses,
 	getCourseDetails,
+	getFullCourseDetails,
 } from "../controllers/course.controller.js";
 
 // Sections Controllers Import
@@ -69,6 +70,7 @@ courseRouter.delete("/deleteCourse", auth, isInstructor, deleteCourse);
 courseRouter.post("/editCourse", auth, isInstructor, editCourse);
 
 courseRouter.post("/getCourseDetails", getCourseDetails);
+courseRouter.get("/getFullCourseDetails", getFullCourseDetails);
 courseRouter.get("/getAllCourses", getAllCourses);
 
 // Category Routes (Only by Admins)
