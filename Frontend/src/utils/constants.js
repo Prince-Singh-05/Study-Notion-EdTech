@@ -9,3 +9,8 @@ export const ENROLLED_COURSE_TYPE = {
 	PENDING: "pending",
 	COMPLETED: "completed",
 };
+
+export const COURSE_STATUS = {
+	DRAFT: "draft",
+	PUBLISHED: "published",
+};
