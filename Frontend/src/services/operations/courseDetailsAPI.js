@@ -59,7 +59,7 @@ export const fetchCourseCategories = async () => {
 	return result;
 };
 
-export const fetchCourseDetails = async (courseId) => {
+export const fetchCourseDetails = async (courseId, dispatch) => {
 	const toastId = toast.loading("Loading...");
 	let result = null;
 

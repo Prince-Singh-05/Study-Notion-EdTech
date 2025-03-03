@@ -33,7 +33,6 @@ export const categories = {
 // Ratings and Reviews
 export const reviewEndpoints = {
 	CREATE_REVIEW_API: BASE_URL + "/course/createReview",
-	GET_AVG_RATING_API: BASE_URL + "/course/getAverageRating",
 	ALL_REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
 	COURSE_REVIEWS_DETAILS_API: BASE_URL + "/course/getReviewsForCourse",
 };
@@ -56,4 +55,11 @@ export const courseEndpoints = {
 	GET_ALL_INSTRUCTOR_COURSES_API:
 		BASE_URL + "/course/getAllInstructorCourses",
 	DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
+};
+
+export const studentEndpoints = {
+	COURSE_PAYMENT_API: BASE_URL + "/payment/capturePayment",
+	COURSE_VERIFY_API: BASE_URL + "/payment/verifySignature",
+	SEND_PAYMENT_SUCCESS_EMAIL_API:
+		BASE_URL + "/payment/sendPaymentSuccessEmail",
 };
