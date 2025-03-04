@@ -14,6 +14,7 @@ const {
 	DELETE_SUB_SECTION_API,
 	EDIT_COURSE_API,
 	GET_ALL_INSTRUCTOR_COURSES_API,
+	GET_FULL_COURSE_DETAILS_API,
 	DELETE_COURSE_API,
 } = courseEndpoints;
 
@@ -59,7 +60,7 @@ export const fetchCourseCategories = async () => {
 	return result;
 };
 
-export const fetchCourseDetails = async (courseId, dispatch) => {
+export const fetchCourseDetails = async (courseId) => {
 	const toastId = toast.loading("Loading...");
 	let result = null;
 
@@ -330,7 +331,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
 	try {
 		const response = await apiConnector(
 			"POST",
-			GET_COURSE_DETAILS_API,
+			GET_FULL_COURSE_DETAILS_API,
 			{
 				courseId,
 			},
