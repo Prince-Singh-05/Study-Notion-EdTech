@@ -23,6 +23,8 @@ import MyCourses from "./components/core/Dashboard/MyCourses";
 import EditCourse from "./components/core/Dashboard/EditCourses";
 import Catalog from "./pages/Catalog";
 import Course from "./pages/Course";
+import ViewCourse from "./pages/ViewCourse";
+import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 
 function App() {
 	const { user } = useSelector((state) => state.profile);
@@ -86,6 +88,25 @@ function App() {
 
 					<Route path="/dashboard/*" element={<NotFound />} />
 				</Route>
+
+				<Routes>
+					<Route
+						element={
+							<PrivateRoute>
+								<ViewCourse />
+							</PrivateRoute>
+						}
+					>
+						{user?.accountType === ACCOUNT_TYPE.STUDENT && (
+							<>
+								<Route
+									path="/view-course/:courseId/section/:sectionId/lecture/:lectureId"
+									element={<VideoDetails />}
+								/>
+							</>
+						)}
+					</Route>
+				</Routes>
 
 				{/* Not Found Routes */}
 				<Route path="*" element={<NotFound />} />

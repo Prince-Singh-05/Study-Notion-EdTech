@@ -4,11 +4,13 @@ import { getUserEnrolledCourses } from "../../../services/operations/profileAPI"
 import ProgressBar from "@ramonak/react-progress-bar";
 import Tab from "../../common/Tab.jsx";
 import { ENROLLED_COURSE_TYPE } from "../../../utils/constants.js";
+import { useNavigate } from "react-router-dom";
 
 const EnrolledCourses = () => {
 	const { token } = useSelector((state) => state.auth);
 	const [enrolledCourses, setEnrolledCourses] = useState(null);
 	const [courseStatus, setCourseStatus] = useState(ENROLLED_COURSE_TYPE.ALL);
+	const navigate = useNavigate();
 
 	const tabData = [
 		{
@@ -66,7 +68,13 @@ const EnrolledCourses = () => {
 
 						{enrolledCourses.map((course, index) => (
 							<div key={index}>
-								<div>
+								<div
+									onClick={() =>
+										navigate(
+											`/view-course/${course?._id}/section/${course?.courseContent[0]?._id}/lecture/${course?.courseContent[0]?.subSections[0]?._id}`
+										)
+									}
+								>
 									<img
 										src={course.thumbnail}
 										alt="Course Thumbnail"

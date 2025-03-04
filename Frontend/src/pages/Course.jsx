@@ -16,9 +16,8 @@ import ConfirmationModal from "../components/common/ConfirmationModal";
 import { ACCOUNT_TYPE } from "../utils/constants";
 
 const Course = () => {
-	const { user } = useSelector((state) => state.profile);
+	const { user, loading } = useSelector((state) => state.profile);
 	const { token } = useSelector((state) => state.auth);
-	const { loading } = useSelector((state) => state.profile);
 	const { paymentLoading } = useSelector((state) => state.course);
 	const { cart } = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
