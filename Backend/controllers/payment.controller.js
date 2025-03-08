@@ -6,6 +6,7 @@ import sendMAIL from "../utils/nodemailer.js";
 import { courseEnrollmentEmail } from "../mail/templates/courseEnrollmentEmail.js";
 import { paymentSuccessEmail } from "../mail/templates/paymentSuccessEmail.js";
 import crypto from "crypto";
+import CourseProgress from "../models/courseProgress.model.js";
 
 const capturePayment = async (req, res) => {
 	try {
@@ -144,9 +145,20 @@ const enrollStudents = async (courseIds, userId, res) => {
 				});
 			}
 
+			const courseProgress = await CourseProgress.create({
+				courseId: courseId,
+				userId: userId,
+				completedVideos: [],
+			});
+
 			const enrolledStudent = await User.findByIdAndUpdate(
 				userId,
-				{ $push: { courses: courseId } },
+				{
+					$push: {
+						courses: courseId,
+						courseProgress: courseProgress._id,
+					},
+				},
 				{ new: true }
 			);
 

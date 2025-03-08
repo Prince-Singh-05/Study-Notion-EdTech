@@ -3,6 +3,8 @@ import Profile from "../models/profile.model.js";
 import schedule from "node-schedule";
 import Course from "../models/course.model.js";
 import uploadFileOnCloudinary from "../utils/cloudinary.js";
+import { convertSecondsToDuration } from "../utils/secToDuration.js";
+import CourseProgress from "../models/courseProgress.model.js";
 
 const updateProfile = async (req, res) => {
 	try {
@@ -188,7 +190,15 @@ const getEnrolledCourses = async (req, res) => {
 	try {
 		const userId = req.user.id;
 		const userDetails = await User.findOne({ _id: userId })
-			.populate("courses")
+			.populate({
+				path: "courses",
+				populate: {
+					path: "courseContent",
+					populate: {
+						path: "subSections",
+					},
+				},
+			})
 			.exec();
 
 		if (!userDetails) {
@@ -196,6 +206,54 @@ const getEnrolledCourses = async (req, res) => {
 				success: false,
 				message: `Could not find user with id: ${userId}`,
 			});
+		}
+
+		// calculate progress percentage
+		userDetails = userDetails.toObject();
+		let subSectionLength = 0;
+		for (let i = 0; i < userDetails.courses.length; i++) {
+			let totalDurationInSeconds = 0;
+			subSectionLength = 0;
+
+			for (
+				let j = 0;
+				j < userDetails.courses[i].courseContent.length;
+				j++
+			) {
+				totalDurationInSeconds += userDetails.courses[i].courseContent[
+					j
+				].subSections.reduce(
+					(acc, curr) => acc + parseInt(curr.timeDuration),
+					0
+				);
+
+				userDetails.courses[i].totalDuration = convertSecondsToDuration(
+					totalDurationInSeconds
+				);
+
+				subSectionLength +=
+					userDetails.courses[i].courseContent[j].subSections.length;
+			}
+
+			let courseProgressCount = await CourseProgress.findOne({
+				courseId: userDetails.courses[i]._id,
+				userId: userId,
+			});
+
+			courseProgressCount =
+				courseProgressCount?.completedVideos?.length || 0;
+			if (subSectionLength === 0) {
+				userDetails.courses[i].progressPercentage = 100;
+			} else {
+				// making it upto 2 decimal places
+				const multiplier = Math.pow(10, 2);
+				userDetails.courses[i].progressPercentage =
+					Math.round(
+						(courseProgressCount / subSectionLength) *
+							100 *
+							multiplier
+					) / multiplier;
+			}
 		}
 
 		return res.status(200).json({

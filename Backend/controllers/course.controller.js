@@ -206,6 +206,7 @@ const getFullCourseDetails = async (req, res) => {
 	try {
 		const { courseId } = req.body;
 		const userId = req.user.id;
+
 		const courseDetails = await Course.findById(courseId)
 			.populate({
 				path: "instructor",
