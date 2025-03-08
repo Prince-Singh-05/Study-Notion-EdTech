@@ -56,6 +56,7 @@ export const courseEndpoints = {
 	GET_ALL_INSTRUCTOR_COURSES_API:
 		BASE_URL + "/course/getAllInstructorCourses",
 	DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
+	LECTURE_COMPLETION_API: BASE_URL + "/course/updateCourseProgress",
 };
 
 export const studentEndpoints = {

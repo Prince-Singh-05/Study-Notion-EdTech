@@ -48,6 +48,7 @@ import {
 	getAllReviews,
 	getAllReviewsForCourse,
 } from "../controllers/ratingAndReview.controller.js";
+import { updateCourseProgress } from "../controllers/courseProgress.controller.js";
 
 const courseRouter = Router();
 
@@ -70,8 +71,15 @@ courseRouter.delete("/deleteCourse", auth, isInstructor, deleteCourse);
 courseRouter.post("/editCourse", auth, isInstructor, editCourse);
 
 courseRouter.post("/getCourseDetails", getCourseDetails);
-courseRouter.get("/getFullCourseDetails", getFullCourseDetails);
+courseRouter.post("/getFullCourseDetails", auth, getFullCourseDetails);
 courseRouter.get("/getAllCourses", getAllCourses);
+
+courseRouter.post(
+	"/updateCourseProgress",
+	auth,
+	isStudent,
+	updateCourseProgress
+);
 
 // Category Routes (Only by Admins)
 
