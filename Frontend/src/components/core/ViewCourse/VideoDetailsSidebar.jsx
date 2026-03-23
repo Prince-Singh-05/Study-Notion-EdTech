@@ -40,7 +40,7 @@ const VideoDetailsSidebar = ({ setReviewModal }) => {
 
 	return (
 		<>
-			<div>
+			<div className="text-white mt-14">
 				{/* buttons and headings */}
 				<div>
 					{/* Buttons */}
@@ -106,6 +106,7 @@ const VideoDetailsSidebar = ({ setReviewModal }) => {
 														checked={completedLectures?.includes(
 															lecture?._id
 														)}
+														readOnly={true}
 													/>
 													<span>
 														{lecture?.title}

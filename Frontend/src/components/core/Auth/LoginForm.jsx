@@ -23,7 +23,7 @@ const LoginForm = ({ accountType }) => {
 
 	const handleOnSubmit = (e) => {
 		e.preventDefault();
-		dispatch(login(formData.email, formData.password, navigate));
+		dispatch(login(formData.email, formData.password, accountType, navigate));
 	};
 
 	return (

@@ -269,10 +269,44 @@ const getEnrolledCourses = async (req, res) => {
 	}
 };
 
+const instructorDashboard = async (req, res) => {
+	try {
+		const userId = req.user.id;
+		const courseDetails = await Course.find({ instructor: userId });
+
+		const courseData = courseDetails.map((course) => {
+			const totalStudentsEnrolled = course.studentsEnrolled.length;
+			const totalAmountGenerated = totalStudentsEnrolled * course.price;
+
+			const courseDataWithStats = {
+				_id: course._id,
+				courseName: course.courseName,
+				courseDescription: course.courseDescription,
+				totalStudentsEnrolled,
+				totalAmountGenerated,
+			};
+			return courseDataWithStats;
+		});
+
+		res.status(200).json({
+			success: true,
+			message: "Instructor Dashboard fetched successfully",
+			data: courseData,
+		});
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).json({
+			success: false,
+			message: "Error while fetching instructor dashboard",
+		});
+	}
+};
+
 export {
 	updateProfile,
 	deleteAccount,
 	getAllUserDetails,
 	updateProfilePicture,
 	getEnrolledCourses,
+	instructorDashboard,
 };

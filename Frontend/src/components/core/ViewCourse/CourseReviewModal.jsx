@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-stars";
+import IconButton from "../../common/IconButton";
 
 const CourseReviewModal = ({ setReviewModal }) => {
 	const { user } = useSelector((state) => state.profile);
@@ -37,7 +38,7 @@ const CourseReviewModal = ({ setReviewModal }) => {
 	};
 
 	return (
-		<div>
+		<div className="text-white">
 			<div>
 				{/* Modal Header */}
 				<div>

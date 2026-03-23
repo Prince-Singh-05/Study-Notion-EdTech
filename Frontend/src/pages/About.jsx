@@ -9,6 +9,7 @@ import Footer from "../components/common/Footer";
 import FoundingStory from "../assets/Images/FoundingStory.png";
 import StatsComponent from "../components/core/AboutPage/Stats.jsx";
 import LearningGrid from "../components/core/AboutPage/LearningGrid.jsx";
+import ReviewSlider from "../components/common/ReviewSlider.jsx";
 
 const About = () => {
 	return (
@@ -209,6 +210,7 @@ const About = () => {
 					Reviews From other learners
 				</h2>
 				{/* <ReviewSlider /> */}
+				<ReviewSlider />
 			</section>
 
 			<Footer />
